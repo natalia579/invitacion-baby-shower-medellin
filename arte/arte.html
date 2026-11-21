@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+  body{margin:0;background:transparent;font-family:'GFS Baskerville','DejaVu Serif',serif}
+  .piece{display:inline-block;margin:10px;vertical-align:top}
+  svg{display:block}
+</style></head>
+<body>
+<!-- ═══════════════ FILTROS COMUNES ═══════════════ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- acuarela: bordes irregulares, pigmento granulado y borde más oscuro -->
+    <filter id="wc" filterUnits="userSpaceOnUse" x="-60" y="-60" width="720" height="520" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="3" seed="11" result="n1"/>
+      <feDisplacementMap in="SourceGraphic" in2="n1" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.5" result="db"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="4" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.32" result="grainA"/>
+      <feComposite in="db" in2="grainA" operator="in" result="tex"/>
+      <feMorphology in="d" operator="erode" radius="2" result="er"/>
+      <feComposite in="d" in2="er" operator="out" result="edge"/>
+      <feGaussianBlur in="edge" stdDeviation="0.9" result="edgeB"/>
+      <feColorMatrix in="edgeB" type="matrix" values="0.78 0 0 0 0  0 0.78 0 0 0  0 0 0.74 0 0  0 0 0 0.6 0" result="edgeDark"/>
+      <feMerge><feMergeNode in="tex"/><feMergeNode in="edgeDark"/></feMerge>
+    </filter>
+    <!-- trazo de tinta a mano -->
+    <filter id="ink" filterUnits="userSpaceOnUse" x="-60" y="-60" width="720" height="520">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.25"/>
+    </filter>
+    <!-- grabado suave del paisaje -->
+    <filter id="engrave" filterUnits="userSpaceOnUse" x="-20" y="-20" width="640" height="460">
+      <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.35"/>
+    </filter>
+    <!-- textura de papel -->
+    <filter id="paper" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="21" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.45  0 0 0 0 0.40  0 0 0 0 0.30  0 0 0 0.10 0" result="speck"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="3" result="m"/>
+      <feColorMatrix in="m" type="matrix" values="0 0 0 0 0.55  0 0 0 0 0.48  0 0 0 0 0.36  0 0 0 0.16 -0.02" result="mottle"/>
+      <feMerge result="all"><feMergeNode in="SourceGraphic"/><feMergeNode in="mottle"/><feMergeNode in="speck"/></feMerge>
+      <feComposite in="all" in2="SourceAlpha" operator="in"/>
+    </filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+    <filter id="sombraSolapa" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#5a4a30" flood-opacity="0.22"/>
+    </filter>
+
+    <linearGradient id="cuerpo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8F3E8"/>
+      <stop offset="0.55" stop-color="#EFE6D4"/>
+      <stop offset="1" stop-color="#DCCDB1"/>
+    </linearGradient>
+    <linearGradient id="capota" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FAF6EC"/>
+      <stop offset="0.6" stop-color="#EEE4D0"/>
+      <stop offset="1" stop-color="#DDCFB4"/>
+    </linearGradient>
+    <radialGradient id="lacre" cx="0.42" cy="0.38" r="0.75">
+      <stop offset="0" stop-color="#8A9562"/>
+      <stop offset="0.55" stop-color="#6D7847"/>
+      <stop offset="1" stop-color="#535D33"/>
+    </radialGradient>
+    <radialGradient id="lacreDisco" cx="0.45" cy="0.4" r="0.7">
+      <stop offset="0" stop-color="#7C8754"/>
+      <stop offset="1" stop-color="#606B3C"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<!-- ═══════════════ COCHE: CUERPO (sin ruedas) ═══════════════ -->
+<div class="piece"><svg id="coche-cuerpo" width="460" height="340" viewBox="0 0 460 340">
+  <!-- chasis verde -->
+  <g filter="url(#ink)" fill="none" stroke="#66714A" stroke-linecap="round" stroke-linejoin="round">
+    <!-- manija -->
+    <path d="M104 160 C88 146 76 126 68 104 C62 88 54 80 42 77" stroke-width="4.2"/>
+    <path d="M100 170 C96 196 116 236 140 276" stroke-width="3"/>
+    <!-- resortes en C -->
+    <path d="M182 224 C162 228 150 240 152 252 C154 264 146 273 140 276" stroke-width="3.6"/>
+    <path d="M298 224 C318 228 330 240 328 252 C326 264 334 273 330 276" stroke-width="3.6"/>
+    <!-- arco inferior -->
+    <path d="M140 276 C190 258 280 258 330 276" stroke-width="3.2"/>
+    <!-- volutas -->
+    <path d="M222 260 C210 258 204 248 212 242 C219 237 226 244 220 249" stroke-width="2.4"/>
+    <path d="M248 260 C260 258 266 248 258 242 C251 237 244 244 250 249" stroke-width="2.4"/>
+    <path d="M182 224 L298 224" stroke-width="2.6"/>
+  </g>
+  <!-- empuñadura café -->
+  <path d="M44 77 L20 73" stroke="#8A5E3B" stroke-width="9" stroke-linecap="round" filter="url(#wc)"/>
+  <path d="M42 75 L24 72" stroke="#B0805A" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+
+  <!-- cuerpo marfil -->
+  <g filter="url(#wc)">
+    <path d="M92 150 C92 206 130 224 176 226 L300 226 C346 224 366 202 366 150 Z" fill="url(#cuerpo)"/>
+  </g>
+  <!-- pliegues verticales -->
+  <g stroke="#C9B898" stroke-width="1.3" opacity=".55" filter="url(#ink)" fill="none">
+    <path d="M114 160 C114 190 122 206 130 214"/><path d="M134 160 C134 196 140 212 146 220"/>
+    <path d="M156 160 L158 224"/><path d="M178 160 L178 226"/><path d="M200 160 L200 226"/>
+    <path d="M222 160 L222 226"/><path d="M244 160 L244 226"/><path d="M266 160 L266 226"/>
+    <path d="M288 160 L288 226"/><path d="M310 160 C310 200 306 214 302 224"/>
+    <path d="M332 160 C332 192 326 208 318 220"/><path d="M352 158 C352 182 346 198 338 210"/>
+  </g>
+  <!-- volante bajo el borde -->
+  <path d="M98 160 Q104 167 110 160 Q116 167 122 160 Q128 167 134 160 Q140 167 146 160 Q152 167 158 160 Q164 167 170 160 Q176 167 182 160 Q188 167 194 160 Q200 167 206 160 Q212 167 218 160 Q224 167 230 160 Q236 167 242 160"
+        fill="#F6F0E4" stroke="#CDBE9F" stroke-width="1.1" filter="url(#ink)"/>
+  <!-- borde superior acolchado -->
+  <path d="M88 150 L370 150" stroke="#E9DFCB" stroke-width="10" stroke-linecap="round" filter="url(#wc)"/>
+  <path d="M90 147 L368 147" stroke="#FBF8F1" stroke-width="2.5" stroke-linecap="round" opacity=".9"/>
+
+  <!-- capota plisada -->
+  <g filter="url(#wc)">
+    <path d="M236 152 C238 104 270 62 320 56 C354 54 370 84 372 152 Z" fill="url(#capota)"/>
+  </g>
+  <g fill="none" stroke="#C7B696" stroke-width="1.3" opacity=".7" filter="url(#ink)">
+    <path d="M256 152 C258 112 284 78 324 70"/>
+    <path d="M278 152 C280 118 300 90 330 84"/>
+    <path d="M300 152 C302 124 316 104 338 98"/>
+    <path d="M322 152 C324 132 334 118 348 113"/>
+    <path d="M344 152 C346 140 352 132 360 129"/>
+  </g>
+  <!-- volante delantero de la capota -->
+  <path d="M238 150 C240 104 272 64 320 58" fill="none" stroke="#F7F1E5" stroke-width="8" stroke-linecap="round" filter="url(#wc)"/>
+  <path d="M238 150 C240 104 272 64 320 58" fill="none" stroke="#CDBE9F" stroke-width="7.5" stroke-dasharray="0.1 7" stroke-linecap="round" opacity=".45"/>
+  <!-- bisagra -->
+  <circle cx="360" cy="150" r="4.5" fill="#66714A" filter="url(#ink)"/>
+</svg></div>
+
+<!-- ═══════════════ RUEDA ═══════════════ -->
+<div class="piece"><svg id="rueda" width="120" height="120" viewBox="0 0 120 120">
+  <g filter="url(#ink)" fill="none" stroke-linecap="round">
+    <circle cx="60" cy="60" r="51" stroke="#5E6943" stroke-width="6"/>
+    <circle cx="60" cy="60" r="45" stroke="#8A966B" stroke-width="2.4"/>
+    <g stroke="#6E7A50" stroke-width="1.5" id="rayos"></g>
+    <circle cx="60" cy="60" r="10" stroke="#6E7A50" stroke-width="2"/>
+  </g>
+  <circle cx="60" cy="60" r="5.5" fill="#5E6943" filter="url(#ink)"/>
+  <path d="M24 32 A45 45 0 0 1 48 16" stroke="#C3CBA6" stroke-width="1.6" fill="none" opacity=".7"/>
+</svg></div>
+
+<!-- ═══════════════ SOBRE: INTERIOR (fondo) ═══════════════ -->
+<div class="piece"><svg id="sobre-interior" width="580" height="400" viewBox="0 0 580 400">
+  <rect x="2" y="2" width="576" height="396" rx="6" fill="#ECE3D0" filter="url(#paper)"/>
+  <rect x="2" y="2" width="576" height="396" rx="6" fill="none" stroke="#CFC2A6" stroke-width="1.5"/>
+  <path d="M2 2 L290 236 L578 2" fill="#DDD1B8" opacity=".5"/>
+</svg></div>
+
+<!-- ═══════════════ SOBRE: BOLSILLO (frente con paisaje) ═══════════════ -->
+<div class="piece"><svg id="sobre-bolsillo" width="580" height="400" viewBox="0 0 580 400">
+  <defs><clipPath id="bols"><path d="M2 8 Q2 2 8 4 L290 232 L572 4 Q578 2 578 8 L578 392 Q578 398 572 398 L8 398 Q2 398 2 392 Z"/></clipPath></defs>
+  <g clip-path="url(#bols)">
+    <rect width="580" height="400" fill="#F3EDE0" filter="url(#paper)"/>
+    <g id="toile-bajo" filter="url(#engrave)"></g>
+    <!-- pliegues de las solapas laterales -->
+    <path d="M2 398 L262 238" stroke="#B9AC8F" stroke-width="1.2" opacity=".55"/>
+    <path d="M578 398 L318 238" stroke="#B9AC8F" stroke-width="1.2" opacity=".55"/>
+    <path d="M4 396 L262 240 L318 240 L576 396" fill="none" stroke="#fff" stroke-width="1" opacity=".5" transform="translate(0,2)"/>
+  </g>
+</svg></div>
+
+<!-- ═══════════════ SOBRE: SOLAPA (exterior) ═══════════════ -->
+<div class="piece"><svg id="sobre-solapa" width="580" height="250" viewBox="0 0 580 250">
+  <defs><clipPath id="sol"><path d="M2 2 L578 2 L306 222 Q290 234 274 222 Z"/></clipPath></defs>
+  <g filter="url(#sombraSolapa)">
+    <g clip-path="url(#sol)">
+      <rect width="580" height="250" fill="#F5EFE3" filter="url(#paper)"/>
+      <g id="toile-alto" filter="url(#engrave)"></g>
+    </g>
+  </g>
+  <path d="M2 2 L274 222 Q290 234 306 222 L578 2" fill="none" stroke="#C4B697" stroke-width="1.1" opacity=".8"/>
+</svg></div>
+
+<!-- ═══════════════ SOBRE: SOLAPA (cara interior) ═══════════════ -->
+<div class="piece"><svg id="sobre-solapa-int" width="580" height="250" viewBox="0 0 580 250">
+  <path d="M2 2 L578 2 L306 222 Q290 234 274 222 Z" fill="#E8DFCB" filter="url(#paper)"/>
+  <path d="M2 2 L274 222 Q290 234 306 222 L578 2" fill="none" stroke="#CDBFA2" stroke-width="1.1"/>
+</svg></div>
+
+<!-- ═══════════════ CARTA DENTRO DEL SOBRE ═══════════════ -->
+<div class="piece"><svg id="carta" width="540" height="360" viewBox="0 0 540 360">
+  <rect x="1" y="1" width="538" height="358" rx="3" fill="#FBF8F1" filter="url(#paper)"/>
+  <rect x="16" y="16" width="508" height="328" fill="none" stroke="#8E9A70" stroke-width="2.2"/>
+  <rect x="23" y="23" width="494" height="314" fill="none" stroke="#8E9A70" stroke-width=".8"/>
+  <text x="270" y="78" text-anchor="middle" font-size="15" letter-spacing="5" fill="#7D8862">NATI · SANTI</text>
+  <g stroke="#9AA57E" stroke-width="1" opacity=".75"><path d="M120 112 H420"/><path d="M120 146 H420"/><path d="M120 180 H420"/><path d="M120 214 H360"/></g>
+  <g id="ramita-carta" transform="translate(270 270)"></g>
+</svg></div>
+
+<!-- ═══════════════ SELLO DE LACRE ═══════════════ -->
+<div class="piece"><svg id="sello" width="220" height="220" viewBox="0 0 220 220">
+  <defs>
+    <filter id="sombraSello" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#2f3418" flood-opacity=".35"/>
+    </filter>
+    <filter id="relieve" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.6" result="b"/>
+      <feSpecularLighting in="b" surfaceScale="3" specularConstant=".55" specularExponent="18" lighting-color="#E8EDD2" result="s">
+        <feDistantLight azimuth="235" elevation="42"/>
+      </feSpecularLighting>
+      <feComposite in="s" in2="SourceAlpha" operator="in" result="sIn"/>
+      <feComposite in="SourceGraphic" in2="sIn" operator="arithmetic" k1="0" k2="1" k3="0.55" k4="0"/>
+    </filter>
+  </defs>
+  <g filter="url(#sombraSello)">
+    <path id="blob" fill="url(#lacre)" filter="url(#relieve)"/>
+  </g>
+  <circle cx="110" cy="110" r="66" fill="url(#lacreDisco)" filter="url(#relieve)"/>
+  <circle cx="110" cy="110" r="66" fill="none" stroke="#4D572E" stroke-width="1.4" opacity=".7"/>
+  <circle cx="110" cy="110" r="67.5" fill="none" stroke="#A4AE80" stroke-width=".9" opacity=".6"/>
+  <g id="puntos"></g>
+  <g id="monograma" filter="url(#relieve)"></g>
+</svg></div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
+
+/* rayos de la rueda */
+const rayos = document.getElementById('rayos');
+for (let i = 0; i < 16; i++) {
+  const a = (i / 16) * Math.PI * 2;
+  el('line', { x1: 60 + Math.cos(a) * 10, y1: 60 + Math.sin(a) * 10, x2: 60 + Math.cos(a) * 45, y2: 60 + Math.sin(a) * 45 }, rayos);
+}
+
+/* borde irregular del lacre */
+let d = '';
+for (let i = 0; i <= 180; i++) {
+  const t = (i / 180) * Math.PI * 2;
+  const r = 90 + 4.2 * Math.sin(7 * t + 0.4) + 2.6 * Math.sin(11 * t + 1.7) + 1.8 * Math.sin(17 * t);
+  d += (i ? 'L' : 'M') + (110 + Math.cos(t) * r).toFixed(2) + ' ' + (110 + Math.sin(t) * r).toFixed(2);
+}
+document.getElementById('blob').setAttribute('d', d + 'Z');
+const puntos = document.getElementById('puntos');
+for (let i = 0; i < 44; i++) {
+  const a = (i / 44) * Math.PI * 2;
+  el('circle', { cx: 110 + Math.cos(a) * 58, cy: 110 + Math.sin(a) * 58, r: 1.25, fill: '#4F5930', opacity: .75 }, puntos);
+}
+
+/* ramita botánica */
+function ramita(g, escala, color, grosor) {
+  const p = el('g', { transform: `scale(${escala})`, fill: 'none', stroke: color, 'stroke-width': grosor, 'stroke-linecap': 'round' }, g);
+  el('path', { d: 'M-34 30 C-18 10 4 -8 30 -30' }, p);
+  const hojas = [[-24, 18, -40], [-14, 9, 25], [-6, 1, -35], [4, -7, 30], [12, -14, -30], [20, -21, 35], [28, -28, -20]];
+  for (const [x, y, rot] of hojas) {
+    el('path', { d: 'M0 0 C3 -6 9 -8 14 -7 C10 -2 5 1 0 0 Z', transform: `translate(${x} ${y}) rotate(${rot})`, fill: color, 'fill-opacity': .35 }, p);
+  }
+  return p;
+}
+const mono = document.getElementById('monograma');
+ramita(mono, 1.25, '#3F4825', 1.6).setAttribute('transform', 'translate(110 110) rotate(-8) scale(1.25)');
+el('text', { x: 92, y: 124, 'font-size': 52, 'font-style': 'italic', 'text-anchor': 'middle', fill: '#424B26', 'font-family': 'GFS Baskerville, DejaVu Serif, serif' }, mono).textContent = 'N';
+el('text', { x: 130, y: 126, 'font-size': 52, 'font-style': 'italic', 'text-anchor': 'middle', fill: '#424B26', 'font-family': 'GFS Baskerville, DejaVu Serif, serif' }, mono).textContent = 'S';
+el('text', { x: 111, y: 117, 'font-size': 20, 'text-anchor': 'middle', fill: '#424B26', 'font-family': 'GFS Baskerville, DejaVu Serif, serif' }, mono).textContent = '&';
+
+ramita(document.getElementById('ramita-carta'), 1.3, '#8E9A70', 1.3);
+
+/* ═══════ paisaje grabado estilo toile ═══════ */
+const S = '#86906A';
+function cipres(g, x, base, h, w) {
+  const top = base - h;
+  el('path', { d: `M${x} ${top} C${x + w * .55} ${top + h * .25} ${x + w * .6} ${base - h * .25} ${x + w * .3} ${base} L${x - w * .3} ${base} C${x - w * .6} ${base - h * .25} ${x - w * .55} ${top + h * .25} ${x} ${top} Z`, fill: '#A2AB86', 'fill-opacity': .32, stroke: S, 'stroke-width': .9 }, g);
+  for (let y = top + 6; y < base - 2; y += 4.2) {
+    const k = Math.sin(((y - top) / h) * Math.PI) * w * .42;
+    el('path', { d: `M${x - k} ${y} Q${x} ${y + 2} ${x + k * .7} ${y - 1}`, stroke: S, 'stroke-width': .55, fill: 'none', opacity: .7 }, g);
+  }
+}
+function arbol(g, cx, cy, r, n) {
+  const fill = el('g', {}, g);
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2, rr = Math.random() * r * .75;
+    const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr * .8, s = r * (.22 + Math.random() * .2);
+    el('path', { d: `M${x - s} ${y} a${s} ${s * .8} 0 0 1 ${s * 2} 0`, stroke: S, 'stroke-width': .7, fill: '#A6AF8A', 'fill-opacity': .18 }, fill);
+  }
+  el('path', { d: `M${cx} ${cy + r * .5} L${cx - 1} ${cy + r * 1.35}`, stroke: S, 'stroke-width': 1.4 }, g);
+}
+function colinas(g, y0, amp, x0, x1) {
+  let d = `M${x0} ${y0}`;
+  for (let x = x0; x <= x1; x += 20) d += ` Q${x + 10} ${y0 - amp * Math.sin(x / 70)} ${x + 20} ${y0 - amp * .3 * Math.cos(x / 50)}`;
+  el('path', { d, stroke: S, 'stroke-width': .8, fill: 'none', opacity: .7 }, g);
+  for (let i = 0; i < 26; i++) {
+    const x = x0 + Math.random() * (x1 - x0), y = y0 + 4 + Math.random() * 14;
+    el('path', { d: `M${x} ${y} h${6 + Math.random() * 10}`, stroke: S, 'stroke-width': .5, opacity: .5 }, g);
+  }
+}
+function villa(g, x, y) {
+  el('path', { d: `M${x} ${y} h70 v-34 h-70 Z M${x + 70} ${y} h34 v-22 h-34`, stroke: S, 'stroke-width': .9, fill: '#EDE6D6', 'fill-opacity': .5 }, g);
+  el('path', { d: `M${x - 5} ${y - 34} L${x + 35} ${y - 50} L${x + 75} ${y - 34} Z M${x + 66} ${y - 22} L${x + 87} ${y - 32} L${x + 108} ${y - 22}`, stroke: S, 'stroke-width': .9, fill: '#A6AF8A', 'fill-opacity': .25 }, g);
+  for (let i = 0; i < 4; i++) el('rect', { x: x + 8 + i * 15, y: y - 26, width: 6, height: 9, stroke: S, 'stroke-width': .6, fill: 'none' }, g);
+  for (let i = 0; i < 2; i++) el('rect', { x: x + 76 + i * 14, y: y - 16, width: 6, height: 8, stroke: S, 'stroke-width': .6, fill: 'none' }, g);
+  for (let yy = y - 30; yy < y; yy += 3.5) el('path', { d: `M${x + 1} ${yy} h4`, stroke: S, 'stroke-width': .4, opacity: .6 }, g);
+}
+function templete(g, x, y) {
+  el('path', { d: `M${x - 30} ${y - 52} L${x} ${y - 70} L${x + 30} ${y - 52} Z`, stroke: S, 'stroke-width': .9, fill: '#A6AF8A', 'fill-opacity': .22 }, g);
+  el('path', { d: `M${x - 32} ${y - 52} h64 M${x - 34} ${y} h68 M${x - 32} ${y - 3} h64`, stroke: S, 'stroke-width': .9 }, g);
+  for (let i = 0; i < 5; i++) { const cx = x - 24 + i * 12; el('path', { d: `M${cx - 2} ${y - 50} v47 M${cx + 2} ${y - 50} v47`, stroke: S, 'stroke-width': .6 }, g); }
+  el('path', { d: `M${x - 8} ${y - 3} v-28 a8 8 0 0 1 16 0 v28`, stroke: S, 'stroke-width': .7, fill: '#86906A', 'fill-opacity': .15 }, g);
+}
+function sauce(g, x, y) {
+  el('path', { d: `M${x} ${y} C${x - 2} ${y - 30} ${x + 4} ${y - 50} ${x} ${y - 70}`, stroke: S, 'stroke-width': 1.3, fill: 'none' }, g);
+  for (let i = 0; i < 26; i++) {
+    const ox = x - 36 + Math.random() * 72, oy = y - 80 + Math.random() * 20;
+    el('path', { d: `M${ox} ${oy} q${(Math.random() - .5) * 8} 24 ${(Math.random() - .5) * 6} ${30 + Math.random() * 26}`, stroke: S, 'stroke-width': .55, fill: 'none', opacity: .75 }, g);
+  }
+}
+function agua(g, y, x0, x1) {
+  for (let i = 0; i < 18; i++) {
+    const yy = y + i * 4.5, xa = x0 + Math.random() * 40, xb = x1 - Math.random() * 60;
+    el('path', { d: `M${xa} ${yy} H${xb}`, stroke: S, 'stroke-width': .45, opacity: .45 }, g);
+  }
+}
+function ramas(g, x, y, dir) {
+  for (let i = 0; i < 5; i++) {
+    const len = 50 + Math.random() * 40, ang = -1.2 + i * .25;
+    const ex = x + Math.cos(ang) * len * dir, ey = y + Math.sin(ang) * len;
+    el('path', { d: `M${x} ${y} Q${(x + ex) / 2} ${(y + ey) / 2 - 10} ${ex} ${ey}`, stroke: S, 'stroke-width': .7, fill: 'none' }, g);
+    for (let k = 1; k < 7; k++) {
+      const t = k / 7, px = x + (ex - x) * t, py = y + (ey - y) * t - 6 * Math.sin(t * 3);
+      el('path', { d: 'M0 0 C2 -4 6 -5 9 -4 C6 -1 3 1 0 0 Z', transform: `translate(${px} ${py}) rotate(${(k % 2 ? -50 : 40) + ang * 57})`, fill: '#A6AF8A', 'fill-opacity': .45, stroke: S, 'stroke-width': .4 }, g);
+    }
+  }
+}
+
+/* seeded random para que el paisaje sea siempre igual */
+let seed = 7; Math.random = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+const bajo = document.getElementById('toile-bajo');
+colinas(bajo, 262, 10, 0, 580);
+colinas(bajo, 300, 14, 0, 580);
+arbol(bajo, 250, 262, 26, 14);
+cipres(bajo, 300, 300, 60, 11);
+cipres(bajo, 316, 300, 44, 9);
+arbol(bajo, 40, 250, 46, 26);
+agua(bajo, 330, 150, 520);
+templete(bajo, 470, 318);
+sauce(bajo, 405, 322);
+arbol(bajo, 530, 240, 56, 34);
+cipres(bajo, 355, 318, 70, 13);
+ramas(bajo, 0, 390, 1);
+ramas(bajo, 0, 360, 1);
+ramas(bajo, 580, 395, -1);
+arbol(bajo, 90, 300, 30, 16);
+cipres(bajo, 150, 312, 56, 11);
+el('rect', { width: 580, height: 400, fill: '#F3EDE0', opacity: .18 }, bajo);
+
+const alto = document.getElementById('toile-alto');
+colinas(alto, 120, 12, 0, 580);
+villa(alto, 180, 112);
+cipres(alto, 150, 112, 78, 13);
+cipres(alto, 166, 112, 58, 10);
+cipres(alto, 330, 116, 64, 11);
+arbol(alto, 80, 70, 42, 24);
+arbol(alto, 470, 60, 48, 26);
+arbol(alto, 395, 96, 22, 12);
+colinas(alto, 60, 8, 230, 420);
+arbol(alto, 30, 40, 40, 20);
+arbol(alto, 545, 40, 40, 20);
+cipres(alto, 430, 114, 70, 12);
+cipres(alto, 446, 114, 50, 9);
+for (let i = 0; i < 40; i++) { const x = 40 + Math.random() * 500, y = 125 + Math.random() * 40; el('path', { d: `M${x} ${y} h${4 + Math.random() * 9}`, stroke: S, 'stroke-width': .45, opacity: .45 }, alto); }
+</script>
+</body></html>
