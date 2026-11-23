@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EFE6D6">
+<title>Baby Shower &amp; Gender Reveal · 6 de diciembre</title>
+<meta name="description" content="Domingo 6 de diciembre de 2026 · 4:00 p. m. · Urbanización Nature Aqua">
+<meta property="og:title" content="Baby Shower & Gender Reveal">
+<meta property="og:description" content="Tienes una carta esperándote. Ábrela aquí.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --beige:#EFE6D6; --marfil:#FAF6EE; --arena:#DCCBAE; --arena-o:#C9B48F; --cafe:#6E5543; --cafe-s:#9A7F68; --tinta:#5A4A3C;
+  --salvia:#9AA57E; --salvia-o:#7A8659; --dorado:#C3A877; --suave:#9A7F68;
+  --serif:'Cormorant Garamond','GFS Baskerville',Georgia,serif;
+  --caps:'Cinzel','Cormorant Garamond',Georgia,serif;
+  --script:'Pinyon Script','Cormorant Garamond',cursive;
+  --grano:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .37 0 0 0 0 .28 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  --manchas:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .47 0 0 0 0 .33 0 0 0 .14 -.03'/%3E%3C/filter%3E%3Crect width='600' height='600' filter='url(%23m)'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--serif);color:var(--tinta);background:var(--beige);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.bloqueado{overflow:hidden;height:100vh;height:100dvh}
+button{font:inherit;color:inherit}
+img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
+
+/* ═══════════════ APERTURA ═══════════════ */
+#escena{position:fixed;inset:0;z-index:50;overflow:hidden;background:#E6DCC7;touch-action:manipulation}
+#escena .fondo{position:absolute;inset:-6%;background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,252,244,.55), rgba(255,252,244,0) 60%),
+  radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(120,100,70,.16) 100%),
+  var(--grano), var(--manchas), #E6DCC7;
+  transform-origin:50% 47%; will-change:transform}
+#escena .sombra-suelo{position:absolute;height:14px;border-radius:50%;background:radial-gradient(ellipse, rgba(90,75,50,.22), rgba(90,75,50,0) 70%);will-change:transform;pointer-events:none}
+.coche{position:absolute;left:0;top:0;will-change:transform;pointer-events:none}
+.coche .cuerpo{position:absolute;inset:0;width:100%;will-change:transform}
+.coche .rueda{position:absolute;width:26.087%;will-change:transform}
+.coche .r1{left:17.391%;top:63.529%}
+.coche .r2{left:58.696%;top:63.529%}
+
+#sobre{position:absolute;left:0;top:0;transform-origin:50% 50%;will-change:transform;opacity:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#sobre .capa{position:absolute;inset:0;width:100%;height:100%}
+#sobre .interior{z-index:1}
+#sobre .carta{position:absolute;z-index:2;left:3.5%;width:93%;top:8%;will-change:transform}
+#sobre .bolsillo{z-index:3}
+#sobre .solapa{position:absolute;z-index:4;left:0;top:0;width:100%;height:62.5%;transform-origin:50% 0;transform-style:preserve-3d;will-change:transform}
+#sobre .solapa img{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+#sobre .solapa .dorso{transform:rotateY(180deg)}
+#sobre .persp{position:absolute;inset:0;perspective:1400px}
+#sobre .sombra{position:absolute;left:4%;right:4%;bottom:-7%;height:14%;border-radius:50%;background:radial-gradient(ellipse, rgba(80,65,40,.32), rgba(80,65,40,0) 70%);z-index:0}
+#sobre .caja-sombra{position:absolute;inset:.4%;border-radius:6px;box-shadow:0 14px 34px -10px rgba(70,55,30,.38),0 2px 6px rgba(70,55,30,.12)}
+
+#sello{position:absolute;z-index:6;width:23%;aspect-ratio:1;left:50%;top:57%;transform:translate(-50%,-50%);border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:50%}
+#sello .mitad{position:absolute;inset:0;will-change:transform}
+#sello .mitad img{width:100%;height:100%}
+#sello .izq{clip-path:polygon(0 0,53% 0,47% 16%,55% 33%,45% 52%,54% 70%,48% 86%,52% 100%,0 100%)}
+#sello .der{clip-path:polygon(53% 0,100% 0,100% 100%,52% 100%,48% 86%,54% 70%,45% 52%,55% 33%,47% 16%)}
+#sello .grieta{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#sello .grieta path{stroke-dasharray:240;stroke-dashoffset:240}
+#sello.listo::before{content:"";position:absolute;inset:-9%;border-radius:50%;border:1px solid rgba(110,85,67,.45);animation:halo 2.6s ease-out infinite}
+#sello:focus-visible{outline:2px solid var(--cafe);outline-offset:6px}
+@keyframes halo{0%{transform:scale(.92);opacity:0}30%{opacity:.9}100%{transform:scale(1.28);opacity:0}}
+
+#toca{position:absolute;left:0;right:0;text-align:center;font-family:var(--serif);font-style:italic;font-size:clamp(20px,5.2vw,26px);letter-spacing:.04em;color:var(--cafe);opacity:0;transition:opacity 1.2s ease;pointer-events:none}
+#toca.ver{opacity:1;animation:respira 3.2s ease-in-out 1.2s infinite}
+@keyframes respira{0%,100%{opacity:1}50%{opacity:.55}}
+
+#despliegue{position:fixed;left:0;top:0;width:100vw;height:100vh;height:100dvh;z-index:60;transform-origin:0 0;will-change:transform;pointer-events:none;
+  background:var(--grano),var(--manchas),var(--marfil);box-shadow:0 20px 60px -20px rgba(60,50,30,.35)}
+#despliegue .pliegue{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(150,135,105,.45),transparent)}
+
+/* ═══════════════ PÁGINA EN ESCENAS ═══════════════ */
+#invitacion{visibility:hidden;position:relative;overflow:hidden;overflow:clip;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%, rgba(255,251,243,.65), rgba(255,251,243,0) 70%),
+    var(--grano), var(--manchas),
+    linear-gradient(180deg, #F3ECDF 0%, #EFE5D4 30%, #EADDC7 55%, #EFE5D4 80%, #F3ECDF 100%)}
+#invitacion.visible{visibility:visible}
+
+.esc{position:relative;overflow:hidden;overflow:clip;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:96px 26px;text-align:center}
+.esc:first-child{padding-top:max(80px, env(safe-area-inset-top))}
+.esc .cont{position:relative;z-index:2;width:100%;max-width:560px}
+.esc .deco{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
+
+/* revelado progresivo */
+.rv{opacity:0;transform:translateY(26px);filter:blur(5px);transition:opacity 1.4s ease,transform 1.6s cubic-bezier(.16,.8,.2,1),filter 1.4s ease;transition-delay:calc(var(--d,0) * 1s)}
+.esc.on .rv{opacity:1;transform:none;filter:blur(0)}
+
+/* tipografía */
+.chico{font-family:var(--caps);font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--cafe-s)}
+.titulo{font-family:var(--serif);font-weight:500;color:var(--cafe);text-transform:uppercase;line-height:.98;letter-spacing:.06em;font-size:clamp(46px,14vw,104px)}
+.titulo .amp{display:block;font-family:var(--script);text-transform:none;letter-spacing:0;font-weight:400;color:var(--salvia-o);font-size:.92em;line-height:1;margin:.04em 0 .02em}
+.grande{font-family:var(--serif);font-style:italic;font-size:clamp(25px,7vw,36px);line-height:1.38;color:var(--cafe)}
+.texto{font-family:var(--serif);font-size:clamp(20px,5.3vw,23px);line-height:1.6;color:var(--tinta)}
+.script{font-family:var(--script);color:var(--salvia-o);line-height:1.1;font-weight:400}
+.mt1{margin-top:14px}.mt2{margin-top:26px}.mt3{margin-top:40px}
+
+/* carta */
+.carta-lineas p{font-family:var(--serif);font-size:clamp(22px,6vw,28px);line-height:1.5;color:var(--cafe);margin:0 auto 1.05em;max-width:470px}
+.carta-lineas p.it{font-style:italic;color:var(--salvia-o)}
+.desliza{margin-top:30px;font-family:var(--caps);font-size:10.5px;letter-spacing:.34em;color:var(--cafe-s)}
+.desliza svg{display:block;margin:10px auto 0;width:14px;height:24px;stroke:var(--cafe-s);fill:none;stroke-width:1.1;animation:baja 2.4s ease-in-out infinite}
+@keyframes baja{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(7px);opacity:1}}
+
+/* cinta (divisor) */
+.cinta{display:block;width:min(260px,70%);height:34px;margin:22px auto}
+.cinta path{fill:none;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420;transition:stroke-dashoffset 2.6s cubic-bezier(.3,.1,.2,1);transition-delay:calc(var(--d,0) * 1s)}
+.cinta .a{stroke:var(--cafe-s);stroke-width:1.1}
+.cinta .b{stroke:var(--salvia);stroke-width:.9;opacity:.8}
+.cinta .lazo{fill:none;stroke:var(--cafe-s);stroke-width:1.1;stroke-dasharray:160;stroke-dashoffset:160}
+.esc.on .cinta path{stroke-dashoffset:0}
+
+/* nubes */
+.nube{position:absolute;will-change:transform}
+.nube img{width:100%;animation:deriva var(--t,46s) ease-in-out infinite alternate;opacity:var(--o,.95)}
+@keyframes deriva{from{transform:translateX(-7%)}to{transform:translateX(7%)}}
+
+/* globitos */
+.globo{position:absolute;bottom:-40%;width:var(--w,54px);will-change:transform;animation:sube var(--t,22s) linear infinite;animation-delay:var(--dl,0s);animation-play-state:paused}
+.globo img{width:100%;animation:mece 5.5s ease-in-out infinite alternate;transform-origin:50% 0}
+.esc.vivo .globo{animation-play-state:running}
+@keyframes sube{0%{transform:translateY(0)}100%{transform:translateY(-185vh)}}
+@keyframes mece{from{transform:rotate(-4deg) translateX(-6px)}to{transform:rotate(4deg) translateX(6px)}}
+.globo.quieto{bottom:auto;animation:flota 6s ease-in-out infinite alternate;animation-play-state:running}
+@keyframes flota{from{transform:translateY(-8px)}to{transform:translateY(10px)}}
+
+/* estrellas */
+.estrella{position:absolute;width:var(--s,12px);height:var(--s,12px);opacity:0;animation:brilla var(--t,4.5s) ease-in-out infinite;animation-delay:var(--dl,0s)}
+.estrella{fill:var(--dorado)}
+@keyframes brilla{0%,100%{opacity:0;transform:scale(.6) rotate(0)}50%{opacity:.9;transform:scale(1) rotate(20deg)}}
+
+/* fecha */
+.dia-grande{font-family:var(--serif);font-weight:400;font-size:clamp(130px,40vw,210px);line-height:.85;color:var(--cafe);letter-spacing:-.02em}
+.mes-anio{font-family:var(--caps);font-size:14px;letter-spacing:.42em;color:var(--cafe-s);margin-top:10px}
+.hora{font-family:var(--serif);font-style:italic;font-size:clamp(26px,7vw,32px);color:var(--salvia-o);margin-top:18px}
+.cuenta{display:flex;justify-content:center;gap:clamp(14px,5vw,30px);margin-top:12px}
+.cuenta .n{font-family:var(--serif);font-size:clamp(34px,10vw,46px);line-height:1;color:var(--cafe);font-variant-numeric:lining-nums tabular-nums}
+.cuenta .l{font-family:var(--caps);font-size:9.5px;letter-spacing:.26em;color:var(--cafe-s);margin-top:6px}
+.cuenta .sep{font-family:var(--serif);font-size:30px;color:var(--arena-o);line-height:1.2}
+.cuenta-fin{font-family:var(--script);font-size:42px;color:var(--salvia-o)}
+
+/* lugar */
+.lugar-nombre{font-family:var(--serif);font-weight:500;font-size:clamp(30px,8.6vw,54px);line-height:1.08;color:var(--cafe);text-transform:uppercase;letter-spacing:.03em}
+.ciudad{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--cafe-s);margin-top:8px}
+
+/* botones */
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 28px;border-radius:999px;border:1px solid var(--cafe-s);background:rgba(255,252,246,.55);color:var(--cafe);font-family:var(--caps);font-size:12.5px;letter-spacing:.2em;text-decoration:none;cursor:pointer;transition:background .3s,color .3s,transform .2s,opacity .3s;-webkit-tap-highlight-color:transparent;backdrop-filter:blur(2px)}
+.boton:hover{background:rgba(255,252,246,.9)}
+.boton:active{transform:scale(.98)}
+.boton.lleno{background:var(--cafe);border-color:var(--cafe);color:#FBF7EF}
+.boton.lleno:hover{background:#5E4838}
+.boton svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.4;flex:none}
+.boton[disabled],.boton[aria-disabled="true"]{opacity:.45;cursor:not-allowed;pointer-events:none}
+
+/* formulario */
+.panel{position:relative;background:rgba(252,249,243,.82);border:1px solid rgba(154,127,104,.28);border-radius:22px;padding:34px 24px 30px;box-shadow:0 30px 60px -38px rgba(90,70,45,.5);text-align:left;backdrop-filter:blur(3px)}
+.campo{display:block;font-family:var(--caps);font-size:11px;letter-spacing:.28em;color:var(--cafe-s);margin-bottom:8px}
+.entrada{width:100%;font-family:var(--serif);font-size:24px;color:var(--cafe);background:transparent;border:0;border-bottom:1px solid rgba(154,127,104,.45);padding:6px 2px 10px;border-radius:0;-webkit-appearance:none;appearance:none}
+.entrada:focus{outline:none;border-bottom-color:var(--cafe)}
+.entrada[readonly]{cursor:default}
+.entrada::placeholder{color:#B5A794;font-style:italic}
+.nota-campo{font-style:italic;font-size:15px;color:var(--cafe-s);margin-top:8px}
+.opciones{display:grid;gap:12px;margin-top:26px;border:0}
+.opcion{position:relative;display:flex;align-items:center;gap:14px;padding:15px 18px;border:1px solid rgba(154,127,104,.35);border-radius:16px;background:rgba(255,253,248,.7);cursor:pointer;transition:border-color .3s,background .3s;-webkit-tap-highlight-color:transparent}
+.opcion input{position:absolute;opacity:0;pointer-events:none}
+.opcion .circulo{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--cafe-s);display:grid;place-items:center;transition:.3s}
+.opcion .circulo::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--cafe);transform:scale(0);transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.opcion .txt{font-family:var(--serif);font-size:22px;color:var(--cafe)}
+.opcion input:checked ~ .circulo::after{transform:scale(1)}
+.opcion:has(input:checked){border-color:var(--cafe);background:#FFFDF8}
+.opcion input:focus-visible ~ .circulo{outline:2px solid var(--salvia);outline-offset:3px}
+.panel .enviar{width:100%;margin-top:26px}
+.mensaje{min-height:24px;margin-top:14px;text-align:center;font-style:italic;font-size:17px;color:var(--cafe-s)}
+.mensaje.error{color:#9A5A47}
+.aviso{display:flex;gap:12px;align-items:flex-start;margin-bottom:22px;padding:14px 16px;border-radius:14px;background:rgba(220,203,174,.32);border:1px dashed rgba(154,127,104,.5);font-size:17px;line-height:1.45;color:var(--cafe)}
+.aviso svg{flex:none;width:20px;height:20px;margin-top:2px;stroke:var(--cafe-s);fill:none;stroke-width:1.4}
+.form-off .opciones,.form-off .enviar,.form-off .entrada{opacity:.5;pointer-events:none}
+.listo{text-align:center;padding:10px 0}
+.listo .check{width:54px;height:54px;stroke:var(--salvia-o);fill:none;stroke-width:1.3;margin:0 auto 10px;display:block}
+.listo .check path{stroke-dasharray:60;stroke-dashoffset:60;animation:traza .9s .2s ease forwards}
+@keyframes traza{to{stroke-dashoffset:0}}
+.listo .gracias{font-family:var(--script);font-size:clamp(42px,12vw,54px);color:var(--salvia-o);line-height:1.1}
+.listo .resp{display:inline-block;margin-top:16px;font-family:var(--caps);font-size:11.5px;letter-spacing:.24em;color:var(--cafe);padding:10px 18px;border:1px solid rgba(154,127,104,.45);border-radius:999px}
+.enlace{background:none;border:0;font-family:var(--serif);font-style:italic;font-size:18px;color:var(--cafe-s);text-decoration:underline;text-underline-offset:4px;cursor:pointer;padding:10px;margin-top:10px}
+.puntos{display:inline-flex;gap:6px;vertical-align:middle}
+.puntos i{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pt 1.2s infinite ease-in-out}
+.puntos i:nth-child(2){animation-delay:.15s}.puntos i:nth-child(3){animation-delay:.3s}
+@keyframes pt{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+
+/* dudas por WhatsApp */
+.dudas{margin-top:54px;text-align:center}
+.dudas .pregunta{font-family:var(--serif);font-style:italic;font-size:clamp(28px,8vw,36px);color:var(--cafe)}
+.dudas .sub{font-size:19px;color:var(--cafe-s);margin:6px auto 20px;max-width:330px;line-height:1.5}
+.dudas .pendiente{font-style:italic;font-size:15px;color:var(--cafe-s);margin-top:10px}
+
+.repetir{margin-top:26px;background:none;border:0;font-family:var(--caps);font-size:10.5px;letter-spacing:.3em;color:var(--cafe-s);cursor:pointer;padding:12px}
+
+@media (min-width:760px){
+  .nube{max-width:520px}
+  .globo{--w:64px}
+  .esc{padding:120px 40px}
+  .panel{padding:42px 40px 36px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{transition:opacity .6s ease;transform:none;filter:none}
+  .nube img,.globo,.globo img,.estrella,.desliza svg{animation:none!important}
+  .globo{display:none}
+  .estrella{opacity:.6}
+  .cinta path{transition:none;stroke-dashoffset:0}
+}
+</style>
+</head>
+<body class="bloqueado">
+
+<!-- ═══════════════ APERTURA ═══════════════ -->
+<div id="escena" aria-label="Apertura de la invitación">
+  <div class="fondo"></div>
+  <div class="sombra-suelo" id="sombraCoche"></div>
+  <div id="sobre" role="presentation">
+    <div class="sombra"></div>
+    <div class="caja-sombra"></div>
+    <div class="persp">
+      <img class="capa interior" src="{{IMG:sobre-interior}}" alt="">
+      <img class="carta" src="{{IMG:carta}}" alt="">
+      <img class="capa bolsillo" src="{{IMG:sobre-bolsillo}}" alt="">
+      <div class="solapa"><img class="cara" src="{{IMG:sobre-solapa}}" alt=""><img class="dorso" src="{{IMG:sobre-solapa-int}}" alt=""></div>
+    </div>
+    <button id="sello" type="button" aria-label="Abrir la invitación">
+      <span class="mitad izq"><img src="{{IMG:sello}}" alt=""></span>
+      <span class="mitad der"><img data-copia="sello" alt=""></span>
+      <svg class="grieta" viewBox="0 0 100 100" aria-hidden="true"><path d="M53 4 L47 16 L55 33 L45 52 L54 70 L48 86 L52 98" fill="none" stroke="#2F361A" stroke-width="1.4" stroke-linejoin="round" opacity=".8"/></svg>
+    </button>
+  </div>
+  <div class="coche" id="coche">
+    <img class="cuerpo" src="{{IMG:coche-cuerpo}}" alt="">
+    <img class="rueda r1" src="{{IMG:rueda}}" alt="">
+    <img class="rueda r2" src="{{IMG:rueda}}" alt="">
+  </div>
+  <div id="toca">Toca para descubrir</div>
+</div>
+
+<!-- ═══════════════ INVITACIÓN EN ESCENAS ═══════════════ -->
+<div hidden id="banco">
+  <img data-k="nube-1" src="{{IMG:nube-1}}" alt=""><img data-k="nube-2" src="{{IMG:nube-2}}" alt=""><img data-k="nube-3" src="{{IMG:nube-3}}" alt="">
+  <img data-k="globo-arena" src="{{IMG:globo-arena}}" alt=""><img data-k="globo-salvia" src="{{IMG:globo-salvia}}" alt=""><img data-k="globo-marfil" src="{{IMG:globo-marfil}}" alt="">
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <path id="est" d="M10 0 C11 7 13 9 20 10 C13 11 11 13 10 20 C9 13 7 11 0 10 C7 9 9 7 10 0Z"/>
+    <g id="cintaG">
+      <path class="a" d="M6 18 C50 6 80 30 118 17"/><path class="a" d="M254 18 C210 6 180 30 142 17"/>
+      <path class="b" d="M10 22 C52 11 82 33 118 21"/><path class="b" d="M250 22 C208 11 178 33 142 21"/>
+      <path class="a lazo" d="M130 17 C118 4 108 10 116 17 C108 24 118 30 130 17 C142 4 152 10 144 17 C152 24 142 30 130 17 M130 17 L123 31 M130 17 L137 31"/>
+    </g>
+  </defs>
+</svg>
+
+<main id="invitacion">
+
+  <!-- 1 · La carta -->
+  <section class="esc" id="e-carta">
+    <div class="deco">
+      <div class="nube" data-v=".18" style="width:72%;left:-24%;top:6%;--t:52s"><img data-img="nube-1" alt=""></div>
+      <div class="nube" data-v=".3" style="width:60%;right:-22%;top:62%;--t:44s;--o:.85"><img data-img="nube-3" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:16%;top:30%;--s:11px;--dl:1s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:14%;top:20%;--s:9px;--dl:2.6s"><use href="#est"/></svg>
+    </div>
+    <div class="cont carta-lineas">
+      <p class="rv" style="--d:.2">Hay momentos que se vuelven aún más especiales cuando los compartimos con las personas que queremos.</p>
+      <p class="rv it" style="--d:1.3">Y este es uno de ellos.</p>
+      <p class="rv" style="--d:2.3">Estamos preparando un día muy especial para celebrar la llegada de nuestro bebé, y nos haría muchísima ilusión que fueras parte de él.</p>
+      <p class="rv" style="--d:3.5">Porque hay recuerdos que queremos construir contigo.</p>
+      <div class="desliza rv" style="--d:4.6">DESLIZA<svg viewBox="0 0 14 24"><path d="M7 1 V22 M2 17 L7 22 L12 17"/></svg></div>
+    </div>
+  </section>
+
+  <!-- 2 · El título -->
+  <section class="esc" id="e-titulo">
+    <div class="deco">
+      <div class="nube" data-v=".22" style="width:70%;right:-26%;top:4%;--t:48s"><img data-img="nube-2" alt=""></div>
+      <div class="nube" data-v=".12" style="width:54%;left:-20%;top:70%;--t:58s;--o:.8"><img data-img="nube-1" alt=""></div>
+      <div class="globo" style="left:6%;--w:46px;--t:24s;--dl:-4s"><img data-img="globo-arena" alt=""></div>
+      <div class="globo" style="left:78%;--w:58px;--t:28s;--dl:-15s"><img data-img="globo-marfil" alt=""></div>
+      <div class="globo" style="left:64%;--w:38px;--t:21s;--dl:-9s"><img data-img="globo-salvia" alt=""></div>
+      <div class="globo" style="left:22%;--w:34px;--t:30s;--dl:-21s"><img data-img="globo-marfil" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:12%;top:24%;--s:13px;--dl:.4s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:10%;top:36%;--s:10px;--dl:1.8s;--t:5.5s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:24%;bottom:22%;--s:9px;--dl:3s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:24%;bottom:16%;--s:12px;--dl:2.2s;--t:6s"><use href="#est"/></svg>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">Te invitamos a nuestro</div>
+      <h1 class="titulo mt2">
+        <span class="rv" style="--d:.6;display:block">Baby Shower</span>
+        <span class="amp rv" style="--d:1.4">&amp;</span>
+        <span class="rv" style="--d:2;display:block">Gender Reveal</span>
+      </h1>
+      <svg class="cinta" viewBox="0 0 260 34" style="--d:2.6" aria-hidden="true"><use href="#cintaG"/></svg>
+    </div>
+  </section>
+
+  <!-- 3 · La noticia -->
+  <section class="esc" id="e-noticia">
+    <div class="deco">
+      <div class="globo quieto" style="left:7%;top:16%;--w:62px"><img data-img="globo-arena" alt=""></div>
+      <div class="globo quieto" style="right:7%;top:24%;--w:56px;animation-delay:-3s"><img data-img="globo-salvia" alt=""></div>
+      <div class="nube" data-v=".2" style="width:66%;left:-18%;bottom:2%;--t:50s;--o:.9"><img data-img="nube-3" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:44%;top:14%;--s:12px;--dl:1s"><use href="#est"/></svg>
+    </div>
+    <div class="cont">
+      <div class="script rv" style="--d:.2;font-size:clamp(58px,17vw,88px)">¿Niño o niña?</div>
+      <p class="grande rv mt2" style="--d:1.2">Queremos compartir contigo un día muy especial: celebrar la llegada de nuestro bebé y descubrir juntos si será niño o niña.</p>
+    </div>
+  </section>
+
+  <!-- 4 · La fecha -->
+  <section class="esc" id="e-fecha">
+    <div class="deco">
+      <div class="nube" data-v=".25" style="width:62%;right:-20%;top:8%;--t:46s"><img data-img="nube-1" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:18%;top:22%;--s:10px;--dl:.8s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:20%;bottom:26%;--s:12px;--dl:2.4s"><use href="#est"/></svg>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">Domingo</div>
+      <div class="dia-grande rv" style="--d:.6" aria-label="6 de diciembre de 2026">6</div>
+      <div class="mes-anio rv" style="--d:1.1">DICIEMBRE · 2026</div>
+      <div class="hora rv" style="--d:1.6">a las 4:00 p. m.</div>
+      <svg class="cinta" viewBox="0 0 260 34" style="--d:2" aria-hidden="true"><use href="#cintaG"/></svg>
+      <div class="chico rv" style="--d:2.3">Faltan</div>
+      <div id="cuenta" class="rv" style="--d:2.6"></div>
+    </div>
+  </section>
+
+  <!-- 5 · El lugar -->
+  <section class="esc" id="e-lugar">
+    <div class="deco">
+      <div class="nube" data-v=".16" style="width:74%;left:-26%;top:10%;--t:56s"><img data-img="nube-2" alt=""></div>
+      <div class="nube" data-v=".32" style="width:56%;right:-18%;bottom:6%;--t:42s;--o:.85"><img data-img="nube-3" alt=""></div>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">El lugar</div>
+      <div class="lugar-nombre rv mt2" style="--d:.6">Urbanización<br>Nature Aqua</div>
+      <div class="ciudad rv" style="--d:1.2">Medellín</div>
+      <div class="rv mt3" style="--d:1.8">
+        <a class="boton" id="mapa" href="https://maps.google.com/maps/place//data=!4m2!3m1!1s0x8e4683eed9d12b11:0x732282b292c69841" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          VER UBICACIÓN
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Dress code -->
+  <section class="esc" id="e-dress">
+    <div class="deco">
+      <svg class="estrella" viewBox="0 0 20 20" style="left:14%;top:28%;--s:14px;--dl:.2s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:12%;top:22%;--s:10px;--dl:1.4s;--t:3.8s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:22%;bottom:24%;--s:9px;--dl:2.4s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:20%;bottom:30%;--s:13px;--dl:.9s;--t:5s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:50%;top:14%;--s:8px;--dl:3.2s"><use href="#est"/></svg>
+      <div class="nube" data-v=".2" style="width:58%;left:-16%;bottom:4%;--t:50s;--o:.8"><img data-img="nube-1" alt=""></div>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">Dress code</div>
+      <p class="grande rv mt2" style="--d:.7;font-size:clamp(30px,8.6vw,44px);line-height:1.28">Ponte súper guapa, que tenemos un día muy especial por celebrar.</p>
+    </div>
+  </section>
+
+  <!-- 7 · Regalos -->
+  <section class="esc" id="e-regalos">
+    <div class="deco">
+      <div class="nube" data-v=".22" style="width:64%;right:-22%;top:12%;--t:48s"><img data-img="nube-3" alt=""></div>
+      <div class="globo quieto" style="left:10%;bottom:14%;--w:44px;animation-delay:-2s"><img data-img="globo-marfil" alt=""></div>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">Regalos</div>
+      <p class="grande rv mt2" style="--d:.6">Lo más importante para nosotros es que estés ahí.</p>
+      <p class="texto rv mt1" style="--d:1.4">Si quieres traer un detalle para nuestro bebé, que sea unisex: el secreto lo descubriremos juntos ese día.</p>
+    </div>
+  </section>
+
+  <!-- 8 · Confirmación -->
+  <section class="esc" id="e-confirmar">
+    <div class="deco">
+      <div class="nube" data-v=".14" style="width:70%;left:-30%;top:2%;--t:54s;--o:.85"><img data-img="nube-2" alt=""></div>
+    </div>
+    <div class="cont">
+      <div class="chico rv" style="--d:.1">Confirma tu asistencia</div>
+      <svg class="cinta" viewBox="0 0 260 34" style="--d:.4" aria-hidden="true"><use href="#cintaG"/></svg>
+      <div class="panel rv" style="--d:.7" id="rsvp">
+        <form id="formulario" novalidate>
+          <div id="aviso"></div>
+          <label class="campo" for="nombre">NOMBRE DEL INVITADO</label>
+          <input class="entrada" id="nombre" name="nombre" type="text" readonly autocomplete="off" placeholder="Tu nombre">
+          <div class="nota-campo" id="notaNombre">Esta invitación es personal.</div>
+          <fieldset class="opciones">
+            <legend class="campo" style="margin-bottom:12px">¿NOS ACOMPAÑAS?</legend>
+            <label class="opcion"><input type="radio" name="asistencia" value="yes"><span class="circulo"></span><span class="txt">Sí, asistiré</span></label>
+            <label class="opcion"><input type="radio" name="asistencia" value="no"><span class="circulo"></span><span class="txt">No podré asistir</span></label>
+          </fieldset>
+          <button class="boton lleno enviar" type="submit" id="enviar">CONFIRMAR ASISTENCIA</button>
+          <div class="mensaje" id="mensaje" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="dudas rv" style="--d:1">
+        <div class="pregunta">¿Tienes alguna dudita?</div>
+        <p class="sub">Escríbeme por WhatsApp y con mucho gusto te ayudo.</p>
+        <a class="boton" id="whatsapp" href="#" target="_blank" rel="noopener" aria-disabled="true">
+          <svg viewBox="0 0 24 24"><path d="M20 11.5a8.5 8.5 0 0 1-12.6 7.4L3.5 20l1.2-3.7A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 9.2c.3 1.9 1.8 3.8 3.8 4.6l1.1-1 1.7.8c-.2.9-1 1.5-1.9 1.4-2.9-.3-5.6-3-5.8-5.9-.1-.9.6-1.7 1.4-1.9l.8 1.7z"/></svg>
+          ESCRIBIRME POR WHATSAPP
+        </a>
+        <div class="pendiente" id="waPendiente"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · Despedida -->
+  <section class="esc" id="e-despedida">
+    <div class="deco">
+      <div class="nube" data-v=".2" style="width:68%;right:-24%;top:6%;--t:50s"><img data-img="nube-1" alt=""></div>
+      <div class="globo" style="left:12%;--w:44px;--t:26s;--dl:-6s"><img data-img="globo-salvia" alt=""></div>
+      <div class="globo" style="left:72%;--w:52px;--t:23s;--dl:-13s"><img data-img="globo-arena" alt=""></div>
+      <div class="globo" style="left:40%;--w:36px;--t:31s;--dl:-20s"><img data-img="globo-marfil" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:20%;top:30%;--s:11px;--dl:.6s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:16%;top:46%;--s:9px;--dl:2s"><use href="#est"/></svg>
+    </div>
+    <div class="cont">
+      <div class="script rv" style="--d:.2;font-size:clamp(58px,17vw,86px)">Te esperamos</div>
+      <p class="texto rv mt2" style="--d:1">Gracias por ser parte de este momento tan especial para nosotros.</p>
+      <svg class="cinta" viewBox="0 0 260 34" style="--d:1.6" aria-hidden="true"><use href="#cintaG"/></svg>
+      <div class="rv" style="--d:2">
+        <div class="texto" style="font-style:italic;color:var(--cafe-s)">Con cariño,</div>
+        <div class="script" style="font-size:clamp(50px,14vw,68px);margin-top:4px">Nati y Santi.</div>
+      </div>
+      <button class="repetir rv" style="--d:2.8" type="button" id="repetir">VER LA APERTURA OTRA VEZ</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+'use strict';
+
+/* ─────────── datos del evento ─────────── */
+const EVENTO = new Date('2026-12-06T16:00:00-05:00'); // 6 de diciembre de 2026, 4:00 p. m., hora de Colombia
+const RSVP_URL = '{{ENDPOINT}}';                       // aplicación web de Apps Script de la hoja de Medellín
+const WHATSAPP = '573194416692';                       // número de Nati con indicativo (solo dígitos)
+
+const $ = (s, r = document) => r.querySelector(s);
+const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+try { history.scrollRestoration = 'manual'; } catch (e) {}
+
+/* ═══════════════════ APERTURA ═══════════════════ */
+const escena = $('#escena'), fondo = $('.fondo', escena), coche = $('#coche'), cuerpo = $('.cuerpo', coche);
+const ruedas = [...coche.querySelectorAll('.rueda')], sombraCoche = $('#sombraCoche');
+const sobre = $('#sobre'), sello = $('#sello'), toca = $('#toca');
+
+let L = {};
+function medir() {
+  const vw = innerWidth, vh = innerHeight;
+  const cw = Math.min(Math.max(vw * 0.74, 240), 440), ch = cw * 340 / 460;
+  const suelo = vh * 0.5 + Math.min(vh * 0.17, 130);
+  const sw = Math.min(vw * 0.8, 520, vh * 0.5 * 580 / 400), sh = sw * 400 / 580;
+  L = { vw, vh, cw, ch, suelo, sw, sh, cocheTop: suelo - ch * 327 / 340, radio: cw * 51 / 460 };
+  coche.style.width = cw + 'px'; coche.style.height = ch + 'px';
+  sobre.style.width = sw + 'px'; sobre.style.height = sh + 'px';
+  sombraCoche.style.width = cw * 0.86 + 'px';
+  toca.style.top = (vh * 0.47 + sh / 2 + 26) + 'px';
+}
+medir();
+
+const suave = (u) => u * u * (3 - 2 * u);
+const easeInOut = (u) => (u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+const DUR_COCHE = 6.2, DUR_CAIDA = 1.6, DUR_ZOOM = 2.0;
+const xIni = () => -L.cw / 2 - 30, xFin = () => L.vw + L.cw / 2 + 30;
+const progresoCoche = (t) => { const u = clamp01(t / DUR_COCHE); return u + 0.055 * Math.sin(2 * Math.PI * u); };
+const xCoche = (t) => xIni() + (xFin() - xIni()) * progresoCoche(t);
+
+let tSuelta = 0;
+(function calcularSuelta() {
+  const meta = L.vw / 2 - L.cw * 0.06;
+  for (let t = 0; t < DUR_COCHE; t += 0.01) if (xCoche(t) >= meta) { tSuelta = t; break; }
+})();
+const tZoom = Math.max(tSuelta + DUR_CAIDA + 0.5, DUR_COCHE + 0.05);
+const tFin = tZoom + DUR_ZOOM;
+
+function ponerSobre(x, y, s, r, o) {
+  sobre.style.transform = `translate3d(${x - L.sw / 2}px, ${y - L.sh / 2}px, 0) scale(${s}) rotate(${r}deg)`;
+  if (o !== undefined) sobre.style.opacity = o;
+}
+
+let inicioSuelta = null, aterrizaje = null;
+function cuadro(t) {
+  /* coche */
+  const x = xCoche(t);
+  coche.style.transform = `translate3d(${x - L.cw / 2}px, ${L.cocheTop}px, 0)`;
+  const giro = ((x - xIni()) / L.radio) * 180 / Math.PI;
+  for (const r of ruedas) r.style.transform = `rotate(${giro}deg)`;
+  cuerpo.style.transform = `translateY(${Math.sin((x - xIni()) / 22) * 1.3}px) rotate(${Math.sin((x - xIni()) / 37) * 0.35}deg)`;
+  sombraCoche.style.transform = `translate3d(${x - L.cw * 0.43}px, ${L.suelo - 8}px, 0)`;
+
+  /* sobre: cae del coche */
+  const s0 = 0.3;
+  if (t < tSuelta) { ponerSobre(-999, -999, s0, 0, 0); return; }
+  if (!inicioSuelta) inicioSuelta = { x: xCoche(tSuelta) - L.cw * 0.02, y: L.cocheTop + L.ch * 0.5 };
+  const destino = { x: L.vw / 2 - L.cw * 0.05, y: L.suelo - (L.sh * s0) / 2 + 2 };
+  if (t < tSuelta + DUR_CAIDA) {
+    const u = (t - tSuelta) / DUR_CAIDA;
+    const y = inicioSuelta.y + (destino.y - inicioSuelta.y) * suave(u);
+    const x2 = inicioSuelta.x + (destino.x - inicioSuelta.x) * u + Math.sin(u * Math.PI * 3) * 22 * (1 - u);
+    const r = Math.sin(u * Math.PI * 3 + 0.6) * 16 * (1 - u) - 3 * u;
+    ponerSobre(x2, y, s0, r, Math.min(1, u * 6));
+    return;
+  }
+  aterrizaje = aterrizaje || destino;
+  if (t < tZoom) { ponerSobre(aterrizaje.x, aterrizaje.y, s0, -3, 1); return; }
+
+  /* la cámara se acerca */
+  const z = easeInOut(clamp01((t - tZoom) / DUR_ZOOM));
+  const cx = aterrizaje.x + (L.vw / 2 - aterrizaje.x) * z;
+  const cy = aterrizaje.y + (L.vh * 0.47 - aterrizaje.y) * z;
+  ponerSobre(cx, cy, s0 + (1 - s0) * z, -3 * (1 - z), 1);
+  fondo.style.transform = `scale(${1 + 0.07 * z})`;
+}
+
+function mostrarInvitacionCerrada() {
+  medir();
+  aterrizaje = { x: L.vw / 2, y: L.vh * 0.47 };
+  ponerSobre(L.vw / 2, L.vh * 0.47, 1, 0, 1);
+  coche.style.display = 'none'; sombraCoche.style.display = 'none';
+  toca.classList.add('ver'); sello.classList.add('listo');
+}
+
+let corriendo = true;
+function correrApertura() {
+  if (reducido) { mostrarInvitacionCerrada(); return; }
+  let t = 0, previo = null;
+  const paso = (ahora) => {
+    if (!corriendo) return;
+    if (previo !== null) t += Math.min(0.05, (ahora - previo) / 1000);
+    previo = ahora;
+    cuadro(t);
+    if (t < tFin) requestAnimationFrame(paso);
+    else { coche.style.display = 'none'; sombraCoche.style.display = 'none'; setTimeout(() => { toca.classList.add('ver'); sello.classList.add('listo'); }, 250); }
+  };
+  const imgs = [...document.images].filter((i) => !i.complete);
+  Promise.all(imgs.map((i) => new Promise((ok) => { i.onload = i.onerror = ok; }))).then(() => setTimeout(() => requestAnimationFrame(paso), 450));
+}
+
+addEventListener('resize', () => {
+  if (abierto) return;
+  medir();
+  if (!corriendo || sello.classList.contains('listo')) { ponerSobre(L.vw / 2, L.vh * 0.47, 1, 0, 1); toca.style.top = (L.vh * 0.47 + L.sh / 2 + 26) + 'px'; }
+});
+
+/* ─────────── abrir el sobre ─────────── */
+const espera = (ms) => new Promise((ok) => setTimeout(ok, ms));
+const anima = (el, frames, opts) => el.animate(frames, Object.assign({ fill: 'forwards' }, opts)).finished.catch(() => {});
+let abierto = false;
+
+async function abrir() {
+  if (abierto || !sello.classList.contains('listo')) return;
+  abierto = true;
+  sello.classList.remove('listo');
+  toca.classList.remove('ver'); toca.style.opacity = 0;
+  const solapa = $('.solapa', sobre), carta = $('.carta', sobre);
+
+  if (reducido) {
+    sobre.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: 'forwards' });
+    await espera(400);
+    return revelar(null);
+  }
+
+  /* 1 · el lacre se agrieta */
+  const grieta = $('.grieta path', sello);
+  grieta.style.transition = 'stroke-dashoffset .38s ease-out';
+  grieta.getBoundingClientRect();
+  grieta.style.strokeDashoffset = 0;
+  anima(sello, [{ transform: 'translate(-50%,-50%) scale(1)' }, { transform: 'translate(-50%,-50%) scale(.97)' }, { transform: 'translate(-50%,-50%) scale(1)' }], { duration: 380, easing: 'ease-out' });
+  await espera(400);
+  grieta.style.transition = 'opacity .3s'; grieta.style.opacity = 0;
+  anima($('.izq', sello), [{ transform: 'none', opacity: 1 }, { transform: 'translate(-16%, 34%) rotate(-24deg)', opacity: 0 }], { duration: 950, easing: 'cubic-bezier(.4,0,.8,.6)' });
+  anima($('.der', sello), [{ transform: 'none', opacity: 1 }, { transform: 'translate(15%, 38%) rotate(20deg)', opacity: 0 }], { duration: 950, easing: 'cubic-bezier(.4,0,.8,.6)' });
+  await espera(380);
+
+  /* 2 · se abre la solapa */
+  anima(solapa, [{ transform: 'rotateX(0deg)' }, { transform: 'rotateX(180deg)' }], { duration: 1150, easing: 'cubic-bezier(.45,.05,.25,1)' });
+  await espera(560);
+  solapa.style.zIndex = 1;
+  await espera(650);
+
+  /* 3 · sale la carta */
+  await anima(carta, [{ transform: 'translateY(0)' }, { transform: `translateY(${-L.sh * 0.6}px)` }], { duration: 1200, easing: 'cubic-bezier(.3,.1,.2,1)' });
+  await espera(180);
+  revelar(carta);
+}
+
+/* 4 · la carta se despliega y aparece la invitación */
+async function revelar(carta) {
+  const pagina = $('#invitacion');
+  window.scrollTo(0, 0);
+  const capa = document.createElement('div');
+  capa.id = 'despliegue';
+  capa.innerHTML = '<i class="pliegue" style="top:33.3%"></i><i class="pliegue" style="top:66.6%"></i>';
+  document.body.appendChild(capa);
+  const vw = innerWidth, vh = innerHeight;
+  if (carta) {
+    const r = carta.getBoundingClientRect();
+    carta.style.visibility = 'hidden';
+    anima(capa, [
+      { transform: `translate(${r.left}px, ${r.top}px) scale(${r.width / vw}, ${r.height / vh})`, opacity: 1 },
+      { transform: `translate(${r.left - r.width * 0.1}px, ${r.top - r.height * 0.6}px) scale(${(r.width * 1.2) / vw}, ${(r.height * 2.2) / vh})`, opacity: 1, offset: 0.45 },
+      { transform: 'translate(0,0) scale(1,1)', opacity: 1 },
+    ], { duration: 1500, easing: 'cubic-bezier(.55,.05,.2,1)' });
+    anima(escena, [{ opacity: 1 }, { opacity: 0 }], { duration: 900, delay: 500, easing: 'ease' });
+    await espera(1500);
+  } else {
+    anima(capa, [{ opacity: 0 }, { opacity: 1 }], { duration: 400 });
+    await espera(400);
+  }
+  anima($('.pliegue', capa), [{ opacity: 1 }, { opacity: 0 }], { duration: 600 });
+  anima(capa.lastElementChild, [{ opacity: 1 }, { opacity: 0 }], { duration: 600 });
+  pagina.classList.add('visible');
+  escena.remove();
+  document.body.classList.remove('bloqueado');
+  await espera(250);
+  await anima(capa, [{ opacity: 1 }, { opacity: 0 }], { duration: 800, easing: 'ease' });
+  capa.remove();
+  escribirCarta();
+}
+
+sello.addEventListener('click', (e) => { e.stopPropagation(); abrir(); });
+sobre.addEventListener('click', abrir);
+sello.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(); } });
+$('#repetir').addEventListener('click', () => { window.scrollTo(0, 0); location.reload(); });
+
+/* ═══════════════════ ESCENAS ═══════════════════ */
+const cintaTpl = document.getElementById('cintaG').innerHTML;
+document.querySelectorAll('svg.cinta').forEach((c) => (c.innerHTML = cintaTpl));
+document.querySelectorAll('[data-copia]').forEach((i) => { i.src = $('#sello .izq img').src; });
+const banco = {};
+document.querySelectorAll('#banco img').forEach((i) => (banco[i.dataset.k] = i.src));
+document.querySelectorAll('[data-img]').forEach((i) => { i.src = banco[i.dataset.img]; i.decoding = 'async'; });
+
+const escenas = [...document.querySelectorAll('.esc')];
+function escribirCarta() {
+  const primera = escenas[0];
+  requestAnimationFrame(() => requestAnimationFrame(() => primera.classList.add('on', 'vivo')));
+  observarEscenas();
+}
+
+function observarEscenas() {
+  if (!('IntersectionObserver' in window)) { escenas.forEach((e) => e.classList.add('on', 'vivo')); return; }
+  const aparecer = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('on'); aparecer.unobserve(e.target); }
+  }), { threshold: 0.28 });
+  const vida = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('vivo', e.isIntersecting)), { threshold: 0 });
+  escenas.forEach((e) => { aparecer.observe(e); vida.observe(e); });
+}
+
+/* profundidad: las nubes se desplazan a otra velocidad que el texto */
+const capas = [...document.querySelectorAll('[data-v]')].map((el) => ({ el, v: parseFloat(el.dataset.v) }));
+let pendienteParallax = false;
+function parallax() {
+  pendienteParallax = false;
+  const vh = innerHeight;
+  for (const c of capas) {
+    const r = c.el.parentElement.getBoundingClientRect();
+    if (r.bottom < -vh || r.top > vh * 2) continue;
+    const centro = r.top + r.height / 2 - vh / 2;
+    c.el.style.transform = `translate3d(0, ${(-centro * c.v).toFixed(1)}px, 0)`;
+  }
+}
+if (!reducido) {
+  addEventListener('scroll', () => { if (!pendienteParallax) { pendienteParallax = true; requestAnimationFrame(parallax); } }, { passive: true });
+  parallax();
+}
+
+/* ═══════════════════ CUENTA REGRESIVA ═══════════════════ */
+const cuenta = $('#cuenta');
+function tic() {
+  let ms = EVENTO - Date.now();
+  if (ms <= 0) {
+    const pasado = Date.now() - EVENTO > 12 * 3600e3;
+    cuenta.innerHTML = `<div class="cuenta-fin">${pasado ? 'Gracias por celebrar con nosotros' : '¡Hoy celebramos!'}</div>`;
+    return false;
+  }
+  const d = Math.floor(ms / 864e5); ms %= 864e5;
+  const h = Math.floor(ms / 36e5); ms %= 36e5;
+  const m = Math.floor(ms / 6e4); const s = Math.floor((ms % 6e4) / 1e3);
+  const u = (n, l) => `<div><div class="n">${String(n).padStart(2, '0')}</div><div class="l">${l}</div></div>`;
+  cuenta.innerHTML = `<div class="cuenta">${u(d, d === 1 ? 'DÍA' : 'DÍAS')}<div class="sep">·</div>${u(h, 'HORAS')}<div class="sep">·</div>${u(m, 'MIN')}<div class="sep">·</div>${u(s, 'SEG')}</div>`;
+  return true;
+}
+if (tic()) { const iv = setInterval(() => { if (!tic()) clearInterval(iv); }, 1000); }
+
+/* ═══════════════════ WHATSAPP PARA DUDAS ═══════════════════ */
+(() => {
+  const a = $('#whatsapp');
+  const numero = WHATSAPP.replace(/\D/g, '');
+  if (/^\d{10,15}$/.test(numero)) {
+    a.href = `https://wa.me/${numero}?text=${encodeURIComponent('¡Hola, Nati! Tengo una dudita sobre el Baby Shower del 6 de diciembre. 🤍')}`;
+    a.removeAttribute('aria-disabled');
+  } else {
+    a.removeAttribute('href');
+    $('#waPendiente').textContent = 'Este botón se activará muy pronto.';
+  }
+})();
+
+/* ═══════════════════ CONFIRMACIÓN INDIVIDUAL ═══════════════════ */
+const form = $('#formulario'), panel = $('#rsvp'), aviso = $('#aviso'), campoNombre = $('#nombre');
+const notaNombre = $('#notaNombre'), msj = $('#mensaje'), botonEnviar = $('#enviar');
+const ID_RE = /^[A-Za-z0-9]{20,40}$/;
+const idInvitado = (() => {
+  try {
+    const u = new URL(location.href);
+    const v = u.searchParams.get('i') || new URLSearchParams(u.hash.slice(1)).get('i');
+    return v && ID_RE.test(v) ? v : null;
+  } catch (e) { return null; }
+})();
+const conectado = /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(RSVP_URL) || /^http:\/\/localhost:\d+\/exec$/.test(RSVP_URL);
+let invitado = null;
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const primerNombre = (n) => String(n || '').trim().split(/\s+/)[0] || '';
+const PUNTOS = '<span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span>';
+const ICONO_INFO = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>';
+const conTiempo = (p, ms = 20000) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error('tiempo')), ms))]);
+
+function bloquear(texto) {
+  form.classList.add('form-off');
+  aviso.innerHTML = `<div class="aviso">${ICONO_INFO}<div>${texto}</div></div>`;
+  form.querySelectorAll('input, button').forEach((e) => (e.disabled = true));
+}
+function desbloquear() {
+  form.classList.remove('form-off');
+  aviso.innerHTML = '';
+  form.querySelectorAll('input[type=radio], button').forEach((e) => (e.disabled = false));
+}
+
+async function consultar() {
+  const r = await conTiempo(fetch(`${RSVP_URL}?id=${encodeURIComponent(idInvitado)}`, { redirect: 'follow' }));
+  if (!r.ok) throw new Error('http');
+  return r.json();
+}
+async function guardar(attending) {
+  const r = await conTiempo(fetch(RSVP_URL, {
+    method: 'POST', redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ id: idInvitado, attending }),
+  }));
+  if (!r.ok) throw new Error('http');
+  const j = await r.json();
+  if (!j || j.ok !== true || j.attending !== attending) throw new Error('no-guardado');
+  return j;
+}
+
+function mostrarFormulario(texto) {
+  panel.querySelector('.listo')?.remove();
+  form.hidden = false;
+  desbloquear();
+  campoNombre.value = invitado.name;
+  notaNombre.textContent = 'Esta invitación es personal.';
+  form.querySelectorAll('input[name=asistencia]').forEach((r) => (r.checked = r.value === invitado.attending));
+  botonEnviar.textContent = invitado.attending ? 'ACTUALIZAR RESPUESTA' : 'CONFIRMAR ASISTENCIA';
+  msj.className = 'mensaje' + (texto ? ' error' : '');
+  msj.textContent = texto || '';
+}
+
+function mostrarListo(recien) {
+  const si = invitado.attending === 'yes';
+  const nombre = esc(primerNombre(invitado.name));
+  form.hidden = true;
+  panel.querySelector('.listo')?.remove();
+  const div = document.createElement('div');
+  div.className = 'listo';
+  div.innerHTML = `${recien ? '<svg class="check" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" opacity=".35"/><path d="M15 24.5 L21.5 31 L33.5 18"/></svg>' : ''}
+    <div class="gracias">${si ? `¡Gracias, ${nombre}!` : `Gracias, ${nombre}`}</div>
+    <p class="texto mt1" style="text-align:center">${si
+      ? (recien ? 'Tu confirmación quedó registrada. Nos hace muy felices que nos acompañes.' : 'Ya tenemos tu confirmación. Nos hace muy felices que nos acompañes.')
+      : (recien ? 'Tu respuesta quedó registrada. Te vamos a extrañar, gracias por avisarnos.' : 'Ya tenemos tu respuesta. Te vamos a extrañar.')}</p>
+    <div class="resp">${si ? 'ASISTIRÁS' : 'NO PODRÁS ASISTIR'}</div><br>
+    <button class="enlace" type="button">Cambiar mi respuesta</button>`;
+  div.querySelector('button').onclick = () => mostrarFormulario();
+  panel.appendChild(div);
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!invitado) return;
+  const elegida = form.querySelector('input[name=asistencia]:checked');
+  if (!elegida) { msj.className = 'mensaje error'; msj.textContent = 'Elige una opción para confirmar.'; return; }
+  form.querySelectorAll('input, button').forEach((x) => (x.disabled = true));
+  msj.className = 'mensaje';
+  msj.innerHTML = `Guardando tu respuesta ${PUNTOS}`;
+  try {
+    const j = await guardar(elegida.value);
+    invitado.attending = j.attending;
+    mostrarListo(true);
+  } catch (err) {
+    mostrarFormulario('No pudimos guardar tu respuesta. Revisa tu conexión e inténtalo de nuevo.');
+    form.querySelector(`input[value="${elegida.value}"]`).checked = true;
+  }
+});
+
+async function iniciarRsvp() {
+  if (!conectado) {
+    bloquear('<b>Confirmación pendiente de conexión.</b><br>Todavía no está conectada la hoja de confirmaciones, así que por ahora no se guarda ninguna respuesta.');
+    return;
+  }
+  if (!idInvitado) {
+    bloquear('Esta invitación es personal. Para confirmar, abre el enlace que te enviamos por WhatsApp.');
+    return;
+  }
+  bloquear(`Buscando tu invitación ${PUNTOS}`);
+  try {
+    const j = await consultar();
+    if (j && j.ok) {
+      invitado = { name: j.name, attending: j.attending };
+      return invitado.attending ? mostrarListo(false) : mostrarFormulario();
+    }
+    if (j && j.error === 'not_found') return bloquear('No encontramos esta invitación. Escríbenos por WhatsApp y te ayudamos.');
+    throw new Error('respuesta');
+  } catch (e) {
+    bloquear('No pudimos conectarnos en este momento. <button class="enlace" type="button" id="reintentar" style="margin:0;padding:0 4px">Intentar de nuevo</button>');
+    const b = $('#reintentar'); b.disabled = false; b.onclick = iniciarRsvp;
+  }
+}
+iniciarRsvp();
+
+/* ═══════════════════ INICIO ═══════════════════ */
+correrApertura();
+})();
+</script>
+</body>
+</html>

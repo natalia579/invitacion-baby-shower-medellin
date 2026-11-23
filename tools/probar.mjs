@@ -23,7 +23,7 @@ page.on('console', (m) => m.type() === 'error' && errores.push(m.text()));
 const shot = (n) => page.screenshot({ path: `${OUT}/${disp}-${n}.png` });
 await page.goto(`http://localhost:8080/?i=${ids[0]}`);
 if (disp === 'iphone') {
-  for (const [ms, n] of [[1700, '01-entra'], [1500, '02-rueda'], [900, '03-cae'], [900, '04-aterriza'], [1400, '05-sale'], [1300, '06-camara']]) {
+  for (const [ms, n] of [[1800, '01-entra'], [1500, '02-cuelga'], [1300, '03-suelta'], [1200, '04-cae'], [1200, '05-camara'], [1200, '06-acerca']]) {
     await page.waitForTimeout(ms); await shot(n);
   }
 }
@@ -37,36 +37,45 @@ for (const [ms, n] of [[420, '08-grieta'], [700, '09-solapa'], [1100, '10-carta-
 await page.waitForTimeout(3500);
 await shot('12-carta');
 
-const secciones = await page.$$('.seccion');
+const secciones = await page.$$('.esc');
 for (let i = 1; i < secciones.length; i++) {
   await secciones[i].scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1300);
-  await shot(`13-seccion-${i}`);
+  await page.evaluate((i) => document.querySelectorAll('.esc')[i].scrollIntoView({ block: 'center' }), i);
+  await page.waitForTimeout(3600);
+  await shot(`13-escena-${i}`);
 }
 
 /* confirmación */
 const res = {};
-await page.locator('#confirmar').scrollIntoViewIfNeeded();
-await page.waitForSelector('[data-r="yes"]', { timeout: 10000 });
-res.saludo = await page.textContent('.rsvp-hola');
-await page.click('[data-r="yes"]');
-await page.waitForSelector('#cambiar', { timeout: 10000 });
-await page.waitForTimeout(900);
-await shot('14-confirmado');
+await page.evaluate(() => document.querySelector('#rsvp').scrollIntoView({ block: 'center' }));
+await page.waitForFunction(() => document.querySelector('#nombre').value !== '', null, { timeout: 10000 });
+res.nombreCampo = await page.inputValue('#nombre');
+res.nombreEditable = !(await page.getAttribute('#nombre', 'readonly') !== null);
+res.acompanantes = await page.$$eval('input', (xs) => xs.filter((x) => /acomp|personas|guest/i.test(x.name + x.id)).length);
+await page.click('#enviar');
+res.sinOpcion = await page.textContent('#mensaje');
+await page.click('.opcion:has(input[value="yes"])');
+await shot('14-formulario');
+await page.click('#enviar');
+await page.waitForSelector('.listo', { timeout: 10000 });
+await page.waitForTimeout(1200);
+await shot('15-confirmado');
 res.trasSi = (await filas()).map((r) => r.slice(1, 5));
-await page.click('#cambiar');
-await page.click('[data-r="no"]');
-await page.waitForSelector('#cambiar', { timeout: 10000 });
+await page.click('.listo .enlace');
+await page.click('.opcion:has(input[value="no"])');
+await page.click('#enviar');
+await page.waitForSelector('.listo', { timeout: 10000 });
 res.trasNo = (await filas()).map((r) => r.slice(1, 5));
-res.textoNo = await page.textContent('.rsvp-actual');
+res.textoNo = await page.textContent('.listo .resp');
+res.whatsapp = await page.getAttribute('#whatsapp', 'href');
 
 /* sin enlace personal y con enlace inválido */
 const p2 = await ctx.newPage();
 await p2.goto('http://localhost:8080/');
-res.sinEnlace = await p2.textContent('#rsvp');
+res.sinEnlace = await p2.textContent('#aviso');
 await p2.goto('http://localhost:8080/?i=' + '0'.repeat(32));
-await p2.waitForTimeout(800);
-res.enlaceFalso = await p2.textContent('#rsvp');
+await p2.waitForTimeout(900);
+res.enlaceFalso = await p2.textContent('#aviso');
 res.maps = await page.getAttribute('#mapa', 'href');
 res.cuenta = (await page.textContent('#cuenta')).replace(/\s+/g, ' ');
 res.errores = errores;

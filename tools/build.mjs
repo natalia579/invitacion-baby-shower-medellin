@@ -10,7 +10,7 @@ html = html.replace(/\{\{IMG:([\w-]+)\}\}/g, (_, n) => {
   const b = fs.readFileSync(path.join(root, 'arte', 'png', n + '.webp'));
   return 'data:image/webp;base64,' + b.toString('base64');
 });
-html = html.replace('{{ENDPOINT}}', process.env.RSVP_ENDPOINT || '');
+html = html.replace('{{ENDPOINT}}', process.env.RSVP_ENDPOINT || '').replace('{{WHATSAPP}}', process.env.WHATSAPP || '');
 const outDir = path.join(root, process.env.OUT || '.');
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(path.join(outDir, 'index.html'), html);

@@ -115,7 +115,7 @@ function configurar() {
 
   const primera = ss.getSheets()[0];
   const inv = ss.getSheetByName(HOJA_INVITADOS) || (primera.getLastRow() === 0 ? primera.setName(HOJA_INVITADOS) : ss.insertSheet(HOJA_INVITADOS));
-  inv.getRange(1, 1, 1, ENCABEZADOS.length).setValues([ENCABEZADOS]).setFontWeight('bold').setBackground('#E6E9DC');
+  inv.getRange(1, 1, 1, ENCABEZADOS.length).setValues([ENCABEZADOS]).setFontWeight('bold').setBackground('#EFE5D5');
   inv.setFrozenRows(1);
   inv.getRange('D:E').setNumberFormat('dd/mm/yyyy hh:mm');
   inv.setColumnWidth(COL.ID, 260);
