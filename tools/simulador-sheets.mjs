@@ -94,6 +94,7 @@ export function createEnv() {
     ss, ctx,
     get: (id) => JSON.parse(ctx.doGet({ parameter: { id } }).getContent()),
     post: (body) => JSON.parse(ctx.doPost({ postData: { contents: typeof body === 'string' ? body : JSON.stringify(body) } }).getContent()),
+    getSave: (params) => JSON.parse(ctx.doGet({ parameter: params }).getContent()),
     addGuests(names) {
       const sh = ss.getSheetByName('Invitados');
       const start = sh.getLastRow() + 1;
@@ -207,6 +208,17 @@ function runTests() {
     assert.deepEqual(r.slice(1, 3), ['Carla Díaz', 'Sí']);
     assert.equal(t.rows().length, antes);
   });
+  check('guardar por GET (como usa la invitación) funciona y no duplica', () => {
+    const antes = t.rows().length;
+    const r = t.getSave({ name: 'Lourdes Abuela', attending: 'yes' });
+    assert.equal(r.ok, true);
+    assert.equal(t.rows().length, antes + 1);
+    const r2 = t.getSave({ id: r.id, attending: 'no' });
+    assert.equal(r2.attending, 'no');
+    t.getSave({ name: 'lourdes abuela', attending: 'yes' });
+    assert.equal(t.rows().length, antes + 1);
+    assert.equal(t.getSave({ name: 'x', attending: 'yes' }).error, 'bad_request');
+  });
   check('datos inválidos se rechazan', () => {
     assert.equal(t.post({ id: carla, attending: 'quizás' }).error, 'bad_request');
     assert.equal(t.post('no-es-json').error, 'bad_request');
@@ -240,7 +252,7 @@ function serve() {
     if (url.pathname === '/__rows') return res.end(JSON.stringify(t.rows()));
     if (url.pathname === '/__ids') return res.end(JSON.stringify(ids));
     if (url.pathname !== '/exec') { res.statusCode = 404; return res.end(); }
-    if (req.method === 'GET') return res.end(JSON.stringify(t.get(url.searchParams.get('id'))));
+    if (req.method === 'GET') return setTimeout(() => res.end(JSON.stringify(t.getSave(Object.fromEntries(url.searchParams)))), url.searchParams.get('attending') ? 500 : 0);
     let body = '';
     req.on('data', (c) => (body += c));
     req.on('end', () => setTimeout(() => res.end(JSON.stringify(t.post(body))), 600));

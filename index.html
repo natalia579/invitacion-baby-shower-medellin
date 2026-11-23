@@ -800,14 +800,14 @@ async function consultar(id) {
   return r.json();
 }
 async function guardar(datos) {
-  const r = await conTiempo(fetch(RSVP_URL, {
-    method: 'POST', redirect: 'follow',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(datos),
-  }));
-  if (!r.ok) throw new Error('http');
-  const j = await r.json();
-  if (!j || j.ok !== true || j.attending !== datos.attending) throw new Error('no-guardado');
+  /* se envía como una visita normal (GET): es lo más compatible con Safari y con Google */
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(datos)) if (v) q.set(k, v);
+  q.set('t', Date.now());
+  const r = await conTiempo(fetch(`${RSVP_URL}?${q}`, { redirect: 'follow', cache: 'no-store' }));
+  if (!r.ok) throw new Error('http-' + r.status);
+  const j = await r.json().catch(() => { throw new Error('respuesta'); });
+  if (!j || j.ok !== true || j.attending !== datos.attending) throw new Error((j && (j.detail || j.error)) || 'no-guardado');
   return j;
 }
 
@@ -870,7 +870,7 @@ form.addEventListener('submit', async (e) => {
     if (invitado.id) guardado.set(invitado.id);
     mostrarListo(true);
   } catch (err) {
-    mostrarFormulario('No pudimos guardar tu respuesta. Revisa tu conexión e inténtalo de nuevo.');
+    mostrarFormulario(`No pudimos guardar tu respuesta. Inténtalo de nuevo. (${String(err && err.message || 'error').slice(0, 60)})`);
     if (!invitado) campoNombre.value = nombre;
     form.querySelector(`input[value="${elegida.value}"]`).checked = true;
   }

@@ -33,9 +33,11 @@ const ID_RE = /^[A-Za-z0-9]{20,40}$/;
 
 /* ═══════════════════════════ API (la usa la invitación) ═══════════════════════════ */
 
-/** GET ?id=CODIGO → nombre y respuesta actual de ESA invitación (nada más). */
+/** GET ?id=CODIGO → nombre y respuesta actual.  GET ?attending=yes|no&name=…(&id=…) → guarda la respuesta. */
 function doGet(e) {
-  const id = limpiarId_(e && e.parameter && e.parameter.id);
+  const p = (e && e.parameter) || {};
+  if (p.attending) return json_(guardar_(p));
+  const id = limpiarId_(p.id);
   if (!id) return json_({ ok: false, error: 'bad_request' });
   const fila = buscarFila_(id);
   if (!fila) return json_({ ok: false, error: 'not_found' });
@@ -43,7 +45,7 @@ function doGet(e) {
   return json_({ ok: true, name: String(v[COL.NOMBRE - 1] || ''), attending: aApi_(v[COL.ASISTENCIA - 1]) });
 }
 
-/** POST { id?, name?, attending: 'yes' | 'no' } → guarda o actualiza la respuesta sin duplicar. */
+/** POST { id?, name?, attending } → igual que el GET de guardado. */
 function doPost(e) {
   let data;
   try {
@@ -51,20 +53,23 @@ function doPost(e) {
   } catch (err) {
     return json_({ ok: false, error: 'bad_request' });
   }
-  const asistencia = data && data.attending === 'yes' ? 'Sí' : data && data.attending === 'no' ? 'No' : null;
-  const id = limpiarId_(data && data.id);
-  const nombre = limpiarNombre_(data && data.name);
-  if (!asistencia || (!id && !nombre)) return json_({ ok: false, error: 'bad_request' });
+  return json_(guardar_(data || {}));
+}
 
+/** Guarda o actualiza la respuesta sin duplicar (por código o por nombre). */
+function guardar_(data) {
+  const asistencia = data.attending === 'yes' ? 'Sí' : data.attending === 'no' ? 'No' : null;
+  const id = limpiarId_(data.id);
+  const nombre = limpiarNombre_(data.name);
+  if (!asistencia || (!id && !nombre)) return { ok: false, error: 'bad_request' };
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     const sh = hoja_(HOJA_INVITADOS);
     let fila = id ? buscarFila_(id) : 0;
-    if (!fila && id && !nombre) return json_({ ok: false, error: 'not_found' });
+    if (!fila && id && !nombre) return { ok: false, error: 'not_found' };
     if (!fila && nombre) fila = buscarPorNombre_(nombre);
     if (!fila) {
-      // invitado nuevo: se agrega una fila con su propio identificador
       fila = Math.max(2, sh.getLastRow() + 1);
       sh.getRange(fila, COL.NOMBRE).setValue(nombre);
       completarCodigos_(sh, fila, 1);
@@ -72,14 +77,13 @@ function doPost(e) {
     const ahora = new Date();
     const primera = sh.getRange(fila, COL.FECHA).getValue();
     sh.getRange(fila, COL.ASISTENCIA).setValue(asistencia);
-    if (!primera) {
-      sh.getRange(fila, COL.FECHA).setValue(ahora); // primera respuesta
-    } else {
-      sh.getRange(fila, COL.ACTUALIZACION).setValue(ahora); // cambió o repitió su respuesta
-    }
+    if (!primera) sh.getRange(fila, COL.FECHA).setValue(ahora);
+    else sh.getRange(fila, COL.ACTUALIZACION).setValue(ahora);
     SpreadsheetApp.flush();
     const v = sh.getRange(fila, 1, 1, COL.ASISTENCIA).getValues()[0];
-    return json_({ ok: v[COL.ASISTENCIA - 1] === asistencia, attending: aApi_(v[COL.ASISTENCIA - 1]), name: String(v[COL.NOMBRE - 1] || ''), id: String(v[COL.ID - 1] || '') });
+    return { ok: v[COL.ASISTENCIA - 1] === asistencia, attending: aApi_(v[COL.ASISTENCIA - 1]), name: String(v[COL.NOMBRE - 1] || ''), id: String(v[COL.ID - 1] || '') };
+  } catch (err) {
+    return { ok: false, error: 'server', detail: String(err && err.message || err) };
   } finally {
     lock.releaseLock();
   }
@@ -198,7 +202,7 @@ function normalizar_(v) {
 function limpiarNombre_(v) {
   const s = String(v || '').replace(/\s+/g, ' ').trim();
   if (s.length < 2 || s.length > 80) return null;
-  if (!/^[\p{L}][\p{L} .'’-]*$/u.test(s)) return null;
+  if (/[<>{}\[\]\\/=;:@#$%^*+|~`"0-9]/.test(s)) return null;
   return s;
 }
 
