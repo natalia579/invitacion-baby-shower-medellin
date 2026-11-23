@@ -357,6 +357,51 @@
   <path d="M12 488 L12 186 C12 82 100 16 200 16 C300 16 388 82 388 186 L388 488 Z" fill="none" stroke="#B5A082" stroke-width=".9"/>
 </svg></div>
 
+<!-- ═══════════════ GLOBOS AEROSTÁTICOS ═══════════════ -->
+<div class="piece"><svg id="aero-arena" width="200" height="280" viewBox="0 0 200 280"><g class="aero" data-a="#F7F0E3" data-b="#D8C09B"></g></svg></div>
+<div class="piece"><svg id="aero-rosa" width="200" height="280" viewBox="0 0 200 280"><g class="aero" data-a="#F7EEE4" data-b="#CFA68E"></g></svg></div>
+<div class="piece"><svg id="aero-bruma" width="200" height="280" viewBox="0 0 200 280"><g class="aero" data-a="#F8F4EC" data-b="#B4C3CA"></g></svg></div>
+
+<!-- ═══════════════ MAPA DE UBICACIÓN ═══════════════ -->
+<div class="piece"><svg id="mapa" width="380" height="320" viewBox="0 0 380 320">
+  <defs><clipPath id="hoja"><rect x="14" y="14" width="352" height="292" rx="4"/></clipPath></defs>
+  <rect x="14" y="18" width="352" height="292" rx="4" fill="#6B5143" opacity=".12" filter="url(#soft)"/>
+  <g clip-path="url(#hoja)">
+    <rect x="14" y="14" width="352" height="292" fill="#F7F1E6" filter="url(#paper)"/>
+    <g filter="url(#wc)" opacity=".9">
+      <path d="M14 80 C60 50 90 70 120 56 C150 42 170 60 200 40 L200 14 L14 14 Z" fill="#D9DCCB"/>
+      <ellipse cx="300" cy="230" rx="44" ry="26" fill="#D6DAC5"/>
+      <ellipse cx="90" cy="250" rx="36" ry="20" fill="#DCDDCB"/>
+      <ellipse cx="250" cy="70" rx="30" ry="18" fill="#DADCC8"/>
+    </g>
+    <g filter="url(#ink)" fill="none" stroke="#9AA27F" stroke-width="1.1" opacity=".8">
+      <path d="M30 60 l14 -20 l14 20 M52 56 l16 -24 l16 24 M80 52 l12 -18 l12 18 M110 46 l14 -20 l14 20 M144 40 l12 -16 l12 16"/>
+    </g>
+    <g filter="url(#wc)"><path d="M14 196 C70 186 110 210 160 200 C210 190 240 160 290 168 C320 172 346 160 366 150 L366 176 C344 186 322 196 292 192 C246 186 214 216 162 224 C112 232 70 210 14 220 Z" fill="#BCCAD0"/></g>
+    <path d="M14 206 C70 198 110 220 160 212 C210 202 244 172 292 180 C320 184 346 172 366 162" stroke="#EEF3F4" stroke-width="1.4" fill="none" opacity=".9"/>
+    <g fill="none" stroke-linecap="round" filter="url(#ink)">
+      <path d="M14 130 C90 124 170 140 366 118" stroke="#E7D9C2" stroke-width="9"/>
+      <path d="M14 130 C90 124 170 140 366 118" stroke="#D2BE9E" stroke-width="1" />
+      <path d="M150 14 C150 80 170 150 160 306" stroke="#E7D9C2" stroke-width="7"/>
+      <path d="M290 14 C280 90 300 200 270 306" stroke="#EBDFCB" stroke-width="5"/>
+      <path d="M14 270 C120 262 200 280 366 266" stroke="#EBDFCB" stroke-width="5"/>
+      <path d="M60 14 C70 90 40 170 70 306" stroke="#EFE5D3" stroke-width="3.5"/>
+    </g>
+    <g fill="#9EA884" opacity=".7" id="mapaArboles" filter="url(#ink)"></g>
+    <path d="M54 286 C90 250 120 240 150 214 C180 188 200 170 236 150" stroke="#8E6E5A" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round" fill="none"/>
+  </g>
+  <rect x="14" y="14" width="352" height="292" rx="4" fill="none" stroke="#B5A082" stroke-width="1.6"/>
+  <rect x="22" y="22" width="336" height="276" rx="2" fill="none" stroke="#B5A082" stroke-width=".7" opacity=".7"/>
+  <!-- rosa de los vientos -->
+  <g transform="translate(330 262)" filter="url(#ink)"><path d="M0 -20 L4 -4 L20 0 L4 4 L0 20 L-4 4 L-20 0 L-4 -4 Z" fill="#E9DCC6" stroke="#9A7F68" stroke-width=".9"/><path d="M0 -20 L4 -4 L0 0 Z M20 0 L4 4 L0 0 Z M0 20 L-4 4 L0 0 Z M-20 0 L-4 -4 L0 0 Z" fill="#9A7F68" opacity=".55"/></g>
+  <!-- pin -->
+  <ellipse cx="240" cy="152" rx="14" ry="4.5" fill="#4A372D" opacity=".25" filter="url(#soft)"/>
+  <g filter="url(#wc)"><path d="M240 150 C228 132 214 118 214 100 C214 85 226 74 240 74 C254 74 266 85 266 100 C266 118 252 132 240 150 Z" fill="#7A5443"/></g>
+  <circle cx="240" cy="100" r="13" fill="#FBF6EC"/>
+  <path d="M240 106 C232 100 230 95 233 92 C236 89 239 91 240 94 C241 91 244 89 247 92 C250 95 248 100 240 106 Z" fill="#B98F75"/>
+  <path d="M224 88 C228 80 236 77 242 78" stroke="#A67C64" stroke-width="2" fill="none" opacity=".7"/>
+</svg></div>
+
 <script>
 const NS = 'http://www.w3.org/2000/svg';
 const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
@@ -570,5 +615,34 @@ function palmera(x, base, h, inc) {
   }
 }
 palmera(300, 404, 150, 14); palmera(338, 408, 120, 22); palmera(70, 406, 110, -12);
+
+/* globos aerostáticos vintage */
+document.querySelectorAll('.aero').forEach((g) => {
+  const A = g.dataset.a, B = g.dataset.b;
+  const hw = (y) => y < 104 ? 84 * Math.sqrt(Math.max(0, 1 - Math.pow((104 - y) / 94, 2))) : 84 - (84 - 26) * Math.pow((y - 104) / 92, 1.25);
+  const banda = (p1, p2, col, op) => {
+    let d = '';
+    for (let y = 10; y <= 196; y += 3) d += (d ? 'L' : 'M') + (100 + p1 * hw(y)).toFixed(1) + ' ' + y;
+    for (let y = 196; y >= 10; y -= 3) d += 'L' + (100 + p2 * hw(y)).toFixed(1) + ' ' + y;
+    el('path', { d: d + 'Z', fill: col, opacity: op }, cuerpo);
+  };
+  const cuerpo = el('g', { filter: 'url(#wc)' }, g);
+  banda(-1, 1, A, 1);
+  banda(-1, -.62, B, .95); banda(-.22, .22, B, .95); banda(.62, 1, B, .95);
+  const lineas = el('g', { filter: 'url(#ink)', fill: 'none', stroke: '#8E6E5A', 'stroke-width': .8, opacity: .45 }, g);
+  for (const p of [-.62, -.22, .22, .62]) { let d = ''; for (let y = 12; y <= 196; y += 4) d += (d ? 'L' : 'M') + (100 + p * hw(y)).toFixed(1) + ' ' + y; el('path', { d }, lineas); }
+  el('ellipse', { cx: 70, cy: 64, rx: 16, ry: 30, fill: '#fff', opacity: .45, transform: 'rotate(-18 70 64)', filter: 'url(#soft)' }, g);
+  /* faldón festoneado */
+  let f = 'M72 192';
+  for (let x = 72; x < 128; x += 8) f += ` Q${x + 4} 204 ${x + 8} 192`;
+  el('path', { d: f + ' L128 186 L72 186 Z', fill: B, filter: 'url(#wc)' }, g);
+  /* cuerdas y canasta */
+  el('path', { d: 'M76 196 L86 238 M124 196 L114 238 M92 198 L95 238 M108 198 L105 238', stroke: '#7A5E48', 'stroke-width': 1.1, fill: 'none', filter: 'url(#ink)' }, g);
+  el('path', { d: 'M82 236 H118 L115 264 Q100 268 85 264 Z', fill: '#A88464', filter: 'url(#wc)' }, g);
+  el('path', { d: 'M83 245 H117 M84 254 H116 M92 238 V265 M100 238 V267 M108 238 V265', stroke: '#7A5A43', 'stroke-width': .8, opacity: .6, fill: 'none', filter: 'url(#ink)' }, g);
+  el('path', { d: 'M80 236 H120', stroke: '#6B4E3B', 'stroke-width': 3, 'stroke-linecap': 'round', filter: 'url(#ink)' }, g);
+});
+const ma = document.getElementById('mapaArboles');
+for (let i = 0; i < 40; i++) { const x = 20 + Math.random() * 340, y = 20 + Math.random() * 280; if (Math.abs(y - 130) < 14 || (y > 180 && y < 230)) continue; el('circle', { cx: x, cy: y, r: 2 + Math.random() * 3 }, ma); }
 </script>
 </body></html>

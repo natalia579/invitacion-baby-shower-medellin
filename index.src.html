@@ -112,6 +112,11 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
 @keyframes mece{from{transform:rotate(-4deg) translateX(-5px)}to{transform:rotate(4deg) translateX(5px)}}
 .globo.quieto{bottom:auto;animation:flota 6s ease-in-out infinite alternate;animation-play-state:running}
 @keyframes flota{from{transform:translateY(-9px)}to{transform:translateY(11px)}}
+.aero{position:absolute;width:var(--w,60px);will-change:transform;animation:vaiven var(--t,11s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+.aero img{width:100%;animation:mece-aero 7s ease-in-out infinite alternate}
+@keyframes vaiven{0%{transform:translate(0,0)}50%{transform:translate(10px,-14px)}100%{transform:translate(-8px,8px)}}
+@keyframes mece-aero{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg)}}
+.mapa{width:min(92%,360px);margin:28px auto 0;filter:drop-shadow(0 20px 26px rgba(80,60,40,.18))}
 .estrella{position:absolute;width:var(--s,11px);height:var(--s,11px);fill:var(--oro);opacity:0;animation:brilla var(--t,4.6s) ease-in-out infinite;animation-delay:var(--dl,0s)}
 @keyframes brilla{0%,100%{opacity:0;transform:scale(.6) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(20deg)}}
 .avioncito{position:absolute;width:var(--w,120px);will-change:transform;animation:cruza var(--t,34s) linear infinite;animation-delay:var(--dl,0s);animation-play-state:paused}
@@ -222,7 +227,7 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
 }
 @media (prefers-reduced-motion:reduce){
   .rv{transition:opacity .6s ease;transform:none;filter:none}
-  .nube img,.nb img,.globo,.globo img,.estrella,.desliza svg,.avioncito,.avioncito .in{animation:none!important}
+  .nube img,.nb img,.globo,.globo img,.estrella,.desliza svg,.avioncito,.avioncito .in,.aero,.aero img{animation:none!important}
   .globo:not(.quieto),.avioncito{display:none}
   .estrella{opacity:.7}
 }
@@ -235,6 +240,7 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
   <img data-k="g-marfil" src="{{IMG:globo-v-marfil}}" alt=""><img data-k="g-arena" src="{{IMG:globo-v-arena}}" alt=""><img data-k="g-rosa" src="{{IMG:globo-v-rosa}}" alt=""><img data-k="g-bruma" src="{{IMG:globo-v-bruma}}" alt="">
   <img data-k="avioneta" src="{{IMG:avioneta}}" alt=""><img data-k="helice" src="{{IMG:helice}}" alt="">
   <img data-k="sello" src="{{IMG:sello}}" alt="">
+  <img data-k="a-arena" src="{{IMG:aero-arena}}" alt=""><img data-k="a-rosa" src="{{IMG:aero-rosa}}" alt=""><img data-k="a-bruma" src="{{IMG:aero-bruma}}" alt="">
 </div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <path id="est" d="M10 0 C11 7 13 9 20 10 C13 11 11 13 10 20 C9 13 7 11 0 10 C7 9 9 7 10 0Z"/>
@@ -293,6 +299,10 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
       <svg class="estrella" viewBox="0 0 20 20" style="left:12%;top:16%;--dl:.5s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="right:12%;top:30%;--s:9px;--dl:2s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="left:16%;bottom:16%;--s:9px;--dl:3.2s"><use href="#est"/></svg>
+      <div class="aero" style="right:7%;top:9%;--w:52px;--t:12s"><img data-img="a-arena" alt=""></div>
+      <div class="aero" style="left:5%;bottom:20%;--w:40px;--t:10s;--dl:-4s"><img data-img="a-bruma" alt=""></div>
+      <div class="nube" data-v=".18" style="width:70%;left:-34%;bottom:-4%;--t:58s;opacity:.85"><img data-img="nube-c" alt=""></div>
+      <div class="nube" data-v=".1" style="width:60%;right:-30%;top:-3%;--t:64s;opacity:.75"><img data-img="nube-b" alt=""></div>
     </div>
     <div class="cont carta-lineas">
       <div class="rv" style="--d:.1">
@@ -313,10 +323,12 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
       <div class="nube" data-v=".12" style="width:84%;left:-34%;top:6%;--t:66s;opacity:.8"><img data-img="nube-c" alt=""></div>
       <div class="nube" data-v=".2" style="width:76%;right:-30%;top:18%;--t:58s;opacity:.85"><img data-img="nube-b" alt=""></div>
       <div class="avioncito" style="top:14%;--w:96px;--t:30s;--dl:-8s"><div class="in"><svg class="estela" viewBox="0 0 400 30" preserveAspectRatio="none"><path d="M0 18 C80 4 160 28 240 14 C300 4 360 10 400 15"/></svg><img class="c" data-img="avioneta" alt=""><img class="helice" data-img="helice" alt=""></div></div>
+      <div class="aero" style="left:4%;top:34%;--w:58px;--t:12s"><img data-img="a-rosa" alt=""></div>
+      <div class="aero" style="right:5%;top:56%;--w:46px;--t:10s;--dl:-5s"><img data-img="a-bruma" alt=""></div>
       <div class="globo" style="left:6%;--w:44px;--t:26s;--dl:-5s"><img data-img="g-arena" alt=""></div>
       <div class="globo" style="left:80%;--w:54px;--t:30s;--dl:-16s"><img data-img="g-marfil" alt=""></div>
-      <div class="globo" style="left:66%;--w:36px;--t:22s;--dl:-10s"><img data-img="g-bruma" alt=""></div>
-      <div class="globo" style="left:20%;--w:32px;--t:33s;--dl:-24s"><img data-img="g-rosa" alt=""></div>
+      <div class="globo" style="left:86%;--w:36px;--t:22s;--dl:-10s"><img data-img="g-bruma" alt=""></div>
+      <div class="globo" style="left:9%;--w:32px;--t:33s;--dl:-24s"><img data-img="g-rosa" alt=""></div>
       <svg class="estrella" viewBox="0 0 20 20" style="left:14%;top:34%;--s:12px;--dl:.4s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="right:12%;top:44%;--s:10px;--dl:1.8s"><use href="#est"/></svg>
     </div>
@@ -335,28 +347,14 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
     </div>
   </section>
 
-  <!-- 3 · La noticia -->
-  <section class="esc cielo-inv" id="e-noticia">
-    <div class="deco">
-      <div class="globo quieto" style="left:6%;top:15%;--w:62px"><img data-img="g-rosa" alt=""></div>
-      <div class="globo quieto" style="right:6%;top:22%;--w:58px;animation-delay:-3s"><img data-img="g-bruma" alt=""></div>
-      <div class="nube" data-v=".2" style="width:96%;left:-40%;bottom:-6%;--t:54s"><img data-img="nube-c" alt=""></div>
-      <div class="nube" data-v=".3" style="width:80%;right:-36%;bottom:4%;--t:48s;opacity:.9"><img data-img="nube-b" alt=""></div>
-      <svg class="estrella" viewBox="0 0 20 20" style="left:46%;top:13%;--s:12px;--dl:1s"><use href="#est"/></svg>
-    </div>
-    <div class="cont">
-      <div class="italica h-xl rv" style="--d:.2">¿Niño o niña?</div>
-      <svg class="adorno rv" style="--d:.9" viewBox="0 0 150 16" aria-hidden="true"><path d="M4 8 H62 M88 8 H146"/><circle cx="75" cy="8" r="2.6"/></svg>
-      <p class="italica h-m rv" style="--d:1.3">Queremos compartir contigo un día muy especial: celebrar la llegada de nuestro bebé y descubrir juntos si será niño o niña.</p>
-    </div>
-  </section>
-
   <!-- 4 · La fecha -->
   <section class="esc papel" id="e-fecha">
     <div class="marco-fino"></div>
     <div class="deco">
       <div class="nube" data-v=".18" style="width:86%;left:-36%;top:-6%;--t:60s;opacity:.85"><img data-img="nube-a" alt=""></div>
-      <div class="globo quieto" style="right:9%;top:24%;--w:50px;animation-delay:-2s"><img data-img="g-arena" alt=""></div>
+      <div class="aero" style="right:6%;top:20%;--w:62px;--t:12s"><img data-img="a-arena" alt=""></div>
+      <div class="aero" style="left:6%;bottom:12%;--w:44px;--t:10s;--dl:-3s"><img data-img="a-rosa" alt=""></div>
+      <div class="nube" data-v=".22" style="width:76%;right:-36%;bottom:-6%;--t:54s;opacity:.85"><img data-img="nube-d" alt=""></div>
       <svg class="estrella" viewBox="0 0 20 20" style="left:14%;top:44%;--s:10px;--dl:.8s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="right:16%;bottom:20%;--s:12px;--dl:2.4s"><use href="#est"/></svg>
     </div>
@@ -377,11 +375,14 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
     <div class="deco">
       <svg class="estrella" viewBox="0 0 20 20" style="left:12%;top:20%;--s:10px;--dl:.3s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="right:12%;top:62%;--s:11px;--dl:1.6s"><use href="#est"/></svg>
-      <div class="globo quieto" style="left:7%;top:58%;--w:40px;animation-delay:-1s"><img data-img="g-bruma" alt=""></div>
+      <div class="aero" style="left:5%;top:8%;--w:50px;--t:11s"><img data-img="a-bruma" alt=""></div>
+      <div class="aero" style="right:5%;top:46%;--w:42px;--t:13s;--dl:-6s"><img data-img="a-arena" alt=""></div>
+      <div class="nube" data-v=".16" style="width:74%;right:-34%;top:-4%;--t:60s;opacity:.8"><img data-img="nube-a" alt=""></div>
+      <div class="nube" data-v=".24" style="width:70%;left:-34%;bottom:-4%;--t:52s;opacity:.85"><img data-img="nube-c" alt=""></div>
     </div>
     <div class="cont">
       <div class="italica h-l rv" style="--d:.1">El lugar donde nos encontraremos</div>
-      <img class="paisaje rv" style="--d:.7" src="{{IMG:paisaje}}" alt="Ilustración de montañas, palmeras y agua">
+      <img class="mapa rv" style="--d:.7" src="{{IMG:mapa}}" alt="Mapa ilustrado con la ubicación">
       <div class="lugar-nombre rv" style="--d:1.2">Urbanización<br>Nature Aqua</div>
       <div class="italica h-m rv" style="--d:1.5;color:var(--cafe)">Medellín</div>
       <div class="rv mt3" style="--d:1.9">
@@ -397,6 +398,7 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
   <section class="esc cielo" id="e-dress">
     <div class="deco">
       <div class="nube" data-v=".16" style="width:82%;right:-34%;top:4%;--t:62s;opacity:.85"><img data-img="nube-d" alt=""></div>
+      <div class="aero" style="left:6%;top:12%;--w:50px;--t:12s"><img data-img="a-arena" alt=""></div>
       <div class="globo" style="left:8%;--w:38px;--t:28s;--dl:-9s"><img data-img="g-marfil" alt=""></div>
       <div class="globo" style="left:82%;--w:42px;--t:25s;--dl:-18s"><img data-img="g-rosa" alt=""></div>
       <svg class="estrella" viewBox="0 0 20 20" style="left:14%;top:26%;--s:13px;--dl:.2s"><use href="#est"/></svg>
@@ -420,15 +422,22 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
   <section class="esc papel" id="e-regalos">
     <div class="marco-fino"></div>
     <div class="deco">
-      <svg class="estrella" viewBox="0 0 20 20" style="left:18%;top:22%;--s:11px;--dl:.6s"><use href="#est"/></svg>
-      <svg class="estrella" viewBox="0 0 20 20" style="right:18%;top:18%;--s:9px;--dl:2s"><use href="#est"/></svg>
-      <div class="nube" data-v=".2" style="width:80%;right:-38%;bottom:-2%;--t:56s;opacity:.75"><img data-img="nube-c" alt=""></div>
+      <div class="aero" style="right:6%;top:8%;--w:56px;--t:12s"><img data-img="a-rosa" alt=""></div>
+      <div class="aero" style="left:5%;top:20%;--w:44px;--t:10s;--dl:-4s"><img data-img="a-bruma" alt=""></div>
+      <div class="globo quieto" style="left:24%;top:10%;--w:34px;animation-delay:-2s"><img data-img="g-arena" alt=""></div>
+      <div class="globo quieto" style="right:22%;top:28%;--w:30px;animation-delay:-4s"><img data-img="g-marfil" alt=""></div>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:16%;top:40%;--s:12px;--dl:.6s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="right:14%;top:44%;--s:10px;--dl:2s"><use href="#est"/></svg>
+      <svg class="estrella" viewBox="0 0 20 20" style="left:44%;top:6%;--s:9px;--dl:3s"><use href="#est"/></svg>
+      <div class="nube" data-v=".2" style="width:80%;right:-38%;bottom:-4%;--t:56s;opacity:.85"><img data-img="nube-c" alt=""></div>
+      <div class="nube" data-v=".14" style="width:70%;left:-34%;bottom:6%;--t:62s;opacity:.75"><img data-img="nube-b" alt=""></div>
     </div>
     <div class="cont">
       <img class="regalo rv" style="--d:.1" src="{{IMG:regalo}}" alt="">
       <p class="italica h-l rv" style="--d:.6">Lo más importante para nosotros es que estés ahí.</p>
       <svg class="adorno rv" style="--d:1" viewBox="0 0 150 16" aria-hidden="true"><path d="M4 8 H62 M88 8 H146"/><circle cx="75" cy="8" r="2.6"/></svg>
-      <p class="cuerpo rv" style="--d:1.3;max-width:360px;margin:0 auto">Si quieres traer un detalle para nuestro bebé, que sea unisex: el secreto lo descubriremos juntos ese día.</p>
+      <p class="italica h-m rv" style="--d:1.3;color:var(--cafe)">Tu abrazo, tu risa y tu compañía son el regalo que más ilusión nos hace.</p>
+      <p class="cuerpo rv mt2" style="--d:1.8;max-width:360px;margin-left:auto;margin-right:auto">Y si quieres consentir a nuestro bebé con un detalle, que sea unisex: el secreto lo descubriremos juntos ese día.</p>
     </div>
   </section>
 
@@ -436,7 +445,10 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
   <section class="esc papel" id="e-confirmar">
     <div class="marco-fino"></div>
     <div class="deco">
-      <div class="globo quieto" style="right:6%;top:6%;--w:44px"><img data-img="g-arena" alt=""></div>
+      <div class="aero" style="right:5%;top:4%;--w:50px;--t:12s"><img data-img="a-arena" alt=""></div>
+      <div class="aero" style="left:4%;top:24%;--w:38px;--t:10s;--dl:-5s"><img data-img="a-bruma" alt=""></div>
+      <div class="nube" data-v=".18" style="width:70%;left:-36%;bottom:-2%;--t:58s;opacity:.8"><img data-img="nube-a" alt=""></div>
+      <div class="nube" data-v=".12" style="width:64%;right:-32%;top:14%;--t:62s;opacity:.7"><img data-img="nube-d" alt=""></div>
       <svg class="estrella" viewBox="0 0 20 20" style="left:10%;top:9%;--s:10px;--dl:1s"><use href="#est"/></svg>
     </div>
     <div class="cont">
@@ -462,7 +474,9 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
 
   <section class="esc cielo-inv" id="e-dudas" style="min-height:70svh">
     <div class="deco">
-      <div class="globo" style="left:76%;--w:46px;--t:24s;--dl:-6s"><img data-img="g-bruma" alt=""></div>
+      <div class="aero" style="left:6%;top:12%;--w:52px;--t:11s"><img data-img="a-rosa" alt=""></div>
+      <div class="nube" data-v=".14" style="width:70%;right:-30%;top:-6%;--t:60s;opacity:.85"><img data-img="nube-b" alt=""></div>
+      <div class="globo" style="left:84%;--w:46px;--t:24s;--dl:-6s"><img data-img="g-bruma" alt=""></div>
       <div class="globo" style="left:10%;--w:36px;--t:29s;--dl:-17s"><img data-img="g-marfil" alt=""></div>
       <div class="nube" data-v=".25" style="width:100%;left:-44%;bottom:-10%;--t:52s"><img data-img="nube-d" alt=""></div>
     </div>
@@ -484,9 +498,11 @@ img{display:block;max-width:100%;-webkit-user-drag:none;user-select:none}
     <div class="deco">
       <div class="nube" data-v=".14" style="width:86%;right:-34%;top:4%;--t:62s;opacity:.85"><img data-img="nube-c" alt=""></div>
       <div class="avioncito" style="top:12%;--w:84px;--t:36s;--dl:-20s"><div class="in"><svg class="estela" viewBox="0 0 400 30" preserveAspectRatio="none"><path d="M0 18 C80 4 160 28 240 14 C300 4 360 10 400 15"/></svg><img class="c" data-img="avioneta" alt=""><img class="helice" data-img="helice" alt=""></div></div>
-      <div class="globo" style="left:12%;--w:42px;--t:27s;--dl:-6s"><img data-img="g-rosa" alt=""></div>
-      <div class="globo" style="left:74%;--w:50px;--t:23s;--dl:-13s"><img data-img="g-arena" alt=""></div>
-      <div class="globo" style="left:42%;--w:32px;--t:32s;--dl:-21s"><img data-img="g-bruma" alt=""></div>
+      <div class="aero" style="left:5%;top:30%;--w:58px;--t:12s"><img data-img="a-arena" alt=""></div>
+      <div class="aero" style="right:6%;top:22%;--w:46px;--t:10s;--dl:-4s"><img data-img="a-bruma" alt=""></div>
+      <div class="globo" style="left:4%;--w:42px;--t:27s;--dl:-6s"><img data-img="g-rosa" alt=""></div>
+      <div class="globo" style="left:80%;--w:50px;--t:23s;--dl:-13s"><img data-img="g-arena" alt=""></div>
+      <div class="globo" style="left:88%;--w:32px;--t:32s;--dl:-21s"><img data-img="g-bruma" alt=""></div>
       <svg class="estrella" viewBox="0 0 20 20" style="left:20%;top:34%;--s:11px;--dl:.6s"><use href="#est"/></svg>
       <svg class="estrella" viewBox="0 0 20 20" style="right:16%;top:50%;--s:9px;--dl:2s"><use href="#est"/></svg>
     </div>
