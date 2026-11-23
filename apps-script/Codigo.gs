@@ -6,12 +6,12 @@
  * ─────────────────────────────────────────────────────────────────────────────
  *
  *  Cómo funciona:
- *   · Pestaña “Invitados”: escribe un nombre por fila en la columna B.
- *     El programa crea solo su identificador único (A) y su enlace personal (F).
- *   · Solo se puede confirmar con un enlace personal válido. El nombre lo pone
- *     la hoja, no el invitado: nadie puede confirmar por otra persona ni
- *     agregar invitados o acompañantes.
- *   · Si el invitado cambia su respuesta, se actualiza su misma fila.
+ *   · Cualquier persona con el enlace de la invitación puede confirmar
+ *     escribiendo su nombre. Si ese nombre ya está en la hoja (sin importar
+ *     mayúsculas o tildes), se actualiza su misma fila; si no, se agrega.
+ *   · También funcionan los enlaces personales (columna F, con ?i=código):
+ *     esos ya traen el nombre escrito.
+ *   · Cada respuesta es de UNA persona: no hay campo de acompañantes.
  *   · La hoja nunca se hace pública. El programa se ejecuta con tu cuenta.
  */
 
@@ -43,7 +43,7 @@ function doGet(e) {
   return json_({ ok: true, name: String(v[COL.NOMBRE - 1] || ''), attending: aApi_(v[COL.ASISTENCIA - 1]) });
 }
 
-/** POST { id, attending: 'yes' | 'no' } → guarda o actualiza la respuesta de ese identificador. */
+/** POST { id?, name?, attending: 'yes' | 'no' } → guarda o actualiza la respuesta sin duplicar. */
 function doPost(e) {
   let data;
   try {
@@ -51,17 +51,24 @@ function doPost(e) {
   } catch (err) {
     return json_({ ok: false, error: 'bad_request' });
   }
-  const id = limpiarId_(data && data.id);
   const asistencia = data && data.attending === 'yes' ? 'Sí' : data && data.attending === 'no' ? 'No' : null;
-  if (!id || !asistencia) return json_({ ok: false, error: 'bad_request' });
+  const id = limpiarId_(data && data.id);
+  const nombre = limpiarNombre_(data && data.name);
+  if (!asistencia || (!id && !nombre)) return json_({ ok: false, error: 'bad_request' });
 
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
     const sh = hoja_(HOJA_INVITADOS);
-    const fila = buscarFila_(id);
-    if (!fila) return json_({ ok: false, error: 'not_found' });
-
+    let fila = id ? buscarFila_(id) : 0;
+    if (!fila && id && !nombre) return json_({ ok: false, error: 'not_found' });
+    if (!fila && nombre) fila = buscarPorNombre_(nombre);
+    if (!fila) {
+      // invitado nuevo: se agrega una fila con su propio identificador
+      fila = Math.max(2, sh.getLastRow() + 1);
+      sh.getRange(fila, COL.NOMBRE).setValue(nombre);
+      completarCodigos_(sh, fila, 1);
+    }
     const ahora = new Date();
     const primera = sh.getRange(fila, COL.FECHA).getValue();
     sh.getRange(fila, COL.ASISTENCIA).setValue(asistencia);
@@ -71,8 +78,8 @@ function doPost(e) {
       sh.getRange(fila, COL.ACTUALIZACION).setValue(ahora); // cambió o repitió su respuesta
     }
     SpreadsheetApp.flush();
-    const guardado = sh.getRange(fila, COL.ASISTENCIA).getValue();
-    return json_({ ok: guardado === asistencia, attending: aApi_(guardado), name: String(sh.getRange(fila, COL.NOMBRE).getValue() || '') });
+    const v = sh.getRange(fila, 1, 1, COL.ASISTENCIA).getValues()[0];
+    return json_({ ok: v[COL.ASISTENCIA - 1] === asistencia, attending: aApi_(v[COL.ASISTENCIA - 1]), name: String(v[COL.NOMBRE - 1] || ''), id: String(v[COL.ID - 1] || '') });
   } finally {
     lock.releaseLock();
   }
@@ -170,6 +177,29 @@ function buscarFila_(id) {
   const ids = sh.getRange(2, COL.ID, n, 1).getValues();
   for (let i = 0; i < ids.length; i++) if (String(ids[i][0]).trim() === id) return i + 2;
   return 0;
+}
+
+/** Busca una fila por nombre, sin importar mayúsculas, tildes ni espacios de más. */
+function buscarPorNombre_(nombre) {
+  const sh = hoja_(HOJA_INVITADOS);
+  const n = sh.getLastRow() - 1;
+  if (n < 1) return 0;
+  const clave = normalizar_(nombre);
+  const nombres = sh.getRange(2, COL.NOMBRE, n, 1).getValues();
+  for (let i = 0; i < nombres.length; i++) if (normalizar_(nombres[i][0]) === clave) return i + 2;
+  return 0;
+}
+
+function normalizar_(v) {
+  return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+/** Nombre escrito por el invitado: 2 a 80 caracteres, solo letras, espacios y signos comunes. */
+function limpiarNombre_(v) {
+  const s = String(v || '').replace(/\s+/g, ' ').trim();
+  if (s.length < 2 || s.length > 80) return null;
+  if (!/^[\p{L}][\p{L} .'’-]*$/u.test(s)) return null;
+  return s;
 }
 
 function limpiarId_(v) {

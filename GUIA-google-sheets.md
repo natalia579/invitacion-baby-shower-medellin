@@ -31,7 +31,12 @@ Se hace una sola vez (unos 15 minutos). En iPad o celular usa Safari en **modo e
 4. Borra la fila de prueba.
 
 ## Uso diario
-- **Agregar invitados:** un nombre por fila en la **columna B**. El identificador (A) y el
+- **Enlace general:** cualquier persona con https://natalia579.github.io/invitacion-baby-shower-medellin/
+  puede confirmar escribiendo su nombre y apellido. Si el nombre ya existe en la hoja (sin importar
+  mayúsculas o tildes), se actualiza esa fila; si no, se agrega una nueva.
+- **Actualizar el programa sin cambiar la URL:** Implementar → Administrar implementaciones → ✏️ →
+  Versión: *Nueva versión* → Implementar. (No uses “Nueva implementación”: eso crea otra URL.)
+- **Agregar invitados (opcional):** un nombre por fila en la **columna B**. El identificador (A) y el
   enlace personal (F) se crean solos. Si pegas una lista larga, ejecuta `generarCodigosFaltantes`.
 - **Enviar:** copia el enlace de la columna F y pégalo en el WhatsApp de esa persona.
   Cada enlace es solo para ella.

@@ -145,7 +145,7 @@ function runTests() {
     assert.deepEqual(t.get(''), { ok: false, error: 'bad_request' });
   });
   check('“Sí asistiré” se guarda con fecha y hora', () => {
-    assert.deepEqual(t.post({ id: ana, attending: 'yes' }), { ok: true, attending: 'yes', name: 'Ana Gómez' });
+    assert.deepEqual(t.post({ id: ana, attending: 'yes' }), { ok: true, attending: 'yes', name: 'Ana Gómez', id: ana });
     const r = t.rows()[0];
     assert.equal(r[2], 'Sí');
     assert.ok(isDate(r[3]));
@@ -170,18 +170,42 @@ function runTests() {
     t.post({ id: beto, attending: 'no', name: 'Otra Persona' });
     assert.equal(t.rows()[1][1], 'Beto Ruiz');
   });
-  check('sin un identificador válido no se registra a nadie (ni por nombre)', () => {
+  check('cualquiera con el enlace puede confirmar escribiendo su nombre (se crea su fila)', () => {
     const antes = t.rows().length;
-    assert.equal(t.post({ name: 'Elena Restrepo', attending: 'yes' }).error, 'bad_request');
+    const r = t.post({ name: 'Elena Restrepo', attending: 'yes' });
+    assert.equal(r.ok, true);
+    assert.match(r.id, /^[a-f0-9]{32}$/);
+    assert.equal(t.rows().length, antes + 1);
+    const fila = t.rows().at(-1);
+    assert.deepEqual(fila.slice(1, 3), ['Elena Restrepo', 'Sí']);
+  });
+  check('el mismo nombre (con otras mayúsculas o tildes) actualiza su fila, sin duplicar', () => {
+    const antes = t.rows().length;
+    t.post({ name: '  elena   RESTREPÓ ', attending: 'no' });
+    t.post({ name: 'Elena Restrepo', attending: 'yes' });
+    assert.equal(t.rows().length, antes);
+    const fila = t.rows().find((r) => r[1] === 'Elena Restrepo');
+    assert.equal(fila[2], 'Sí');
+    assert.ok(Object.prototype.toString.call(fila[4]) === '[object Date]');
+  });
+  check('un nombre ya cargado en la hoja se reconoce al escribirlo', () => {
+    const antes = t.rows().length;
+    t.post({ name: 'beto ruiz', attending: 'yes' });
+    assert.equal(t.rows().length, antes);
+    assert.equal(t.rows()[1][2], 'Sí');
+  });
+  check('nombres inválidos o vacíos se rechazan', () => {
+    const antes = t.rows().length;
+    for (const n of ['', 'A', '<script>', '123', 'x'.repeat(90)]) assert.equal(t.post({ name: n, attending: 'yes' }).error, 'bad_request', n);
     assert.equal(t.post({ id: '0'.repeat(32), attending: 'yes' }).error, 'not_found');
-    assert.equal(t.post({ id: 'abc', attending: 'yes' }).error, 'bad_request');
     assert.equal(t.rows().length, antes);
   });
   check('no hay campo de acompañantes: datos extra se ignoran', () => {
+    const antes = t.rows().length;
     t.post({ id: carla, attending: 'yes', guests: 4, companions: ['X'] });
     const r = t.rows()[2];
     assert.deepEqual(r.slice(1, 3), ['Carla Díaz', 'Sí']);
-    assert.equal(t.rows().length, 3);
+    assert.equal(t.rows().length, antes);
   });
   check('datos inválidos se rechazan', () => {
     assert.equal(t.post({ id: carla, attending: 'quizás' }).error, 'bad_request');
